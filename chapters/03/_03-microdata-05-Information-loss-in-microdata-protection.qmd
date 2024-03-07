@@ -56,23 +56,23 @@ Disclosure in a microdata context means a correct record re-identification opera
 
 To define the disclosure scenario, the following assumptions are made. Most of them are conservative and contribute to the definition of a worst case scenario:
 
-1.  a sample $s$ from a population $P$ is to be released, and sampling design weights are available;
+1.  A sample $s$ from a population $P$ is to be released, and sampling design weights are available;
 
-2.  the external file available to the intruder covers the whole population $P$; consequently for each $i \in s$, the matching unit $i^*$ does always exist in $P$;
+2.  The external file available to the intruder covers the whole population $P$; consequently for each $i \in s$, the matching unit $i^*$ does always exist in $P$;
 
-3.  the external file available to the intruder contains the individual direct identifiers and a set of categorical identifying variables that are also present in the sample;
+3.  The external file available to the intruder contains the individual direct identifiers and a set of categorical identifying variables that are also present in the sample;
 
-4.  the intruder tries to match a unit $i$ in the sample with a unit $i^*$ in the population register by comparing the values of the identifying variables in the two files;
+4.  The intruder tries to match a unit $i$ in the sample with a unit $i^*$ in the population register by comparing the values of the identifying variables in the two files;
 
-5.  the intruder has no extra information other than that contained in the external file;
+5.  The intruder has no extra information other than that contained in the external file;
 
-6.  a re-identification occurs when a link between a sample unit $i$ and a population unit $i^*$ is established and $i^*$ is actually the individual of the population from which the sampled unit $i$ was derived; e.g. the match has to be a correct match before an identification takes place.
+6.  A re-identification occurs when a link between a sample unit $i$ and a population unit $i^*$ is established and $i^*$ is actually the individual of the population from which the sampled unit $i$ was derived; e.g. the match has to be a correct match before an identification takes place.
 
 Moreover we add the following assumptions:
 
-7.  the intruder tries to match all the records in the sample with a record in the external file;
+7.  The intruder tries to match all the records in the sample with a record in the external file;
 
-8.  the identifying variables agree on correct matches, that is no errors, missing values or time-changes occur in recording the identifying variables in the two microdata file.
+8.  The identifying variables agree on correct matches, that is no errors, missing values or time-changes occur in recording the identifying variables in the two microdata file.
 
 #### Notation
 The following notation is introduced here and used throughout the chapter when describing different methods for estimating the disclosure risk of microdata.
@@ -159,10 +159,12 @@ Shlomo (2022) proposes measures disclosure risk in synthetic data based on the c
 
 For continuous variables the situation is much more complicated. They are measured on the interval or ratio scale and have continuous distributions. Hence, we cannot use frequency of occurrence of individual values as a basis for measurement of the dislosure risk in this case. Therefore, different solutions for measurement of disclosure risk have to be be applied. The famous approach in this context is used in the sdcMicro package of the R environment dedicated to carry out the SDC process on microdata (cf. R Development Core Team (2008), Templ, Kowarik, and Meindl (2023)) and described by Templ (2017). It reports the percentage of observations falling within an interval centered on its masked value whereas the upper bound corresponds to a worst case scenario where an intruder is sure that each nearest neighbour is indeed the true link. More precisely, for a given variable $X$ a minimal level of re-identificaion error can be established (say, $p\in (0,1)$ and as the basis of measurement of the risk the number of records for which the values of $X$ belong to the interval $(x(1-p),x(1+p))$ (where $x$ is the actual value of $X$). If this number is too low (e.g. smaller than 3) then the value $x$ is regarded as unsafe. 
 
-However, the variant of this approach applied in the sdcMicro can be used only in comparative terms, i.e. when data before and after SDC process are compared. For raw data the result is always that the risk lies between 0% and 100%, what is not informative. Alfalayleh and Brankovic (2015) presented a solution related in some sense to this idea based on the precision interval of rediscovering a confidential value, the Shannon’s entropy and the dynamic programming algorithm. Another approaches
-in this context are: 
+However, the variant of this approach applied in the sdcMicro can be used only in comparative terms, i.e. when data before and after SDC process are compared. For raw data the result is always that the risk lies between 0% and 100%, what is not informative. Alfalayleh and Brankovic (2015) presented a solution related in some sense to this idea based on the precision interval of rediscovering a confidential value, the Shannon’s entropy and the dynamic programming algorithm. Another approaches in this context are:
+
 • distance-based linking (Pagliuca and Seri (1999)): based on the distances between records of the original data set and the dataset modified during the SDC process. For each record in protected dataset its nearest and second nearest neighbour in the original dataset is found (using the assumed distance formula). If the record and its nearest neighbour in original data set refer to the same respondent, then the former is regarded to be "linked". Similarly, if the second nearest neighbour in the original dataset and the current record in the protected datsaset correspond to the same individual, then the latter is regarded to be "linked to the second nearest". The measure of risk is here the percentage of records in the protected data set marked as "linked" or "linked to the second nearest", 
+
 • probabilistic record linkage (Jaro (1989)): the disclosure risk is here understood as percentage of "linked" pairs of records from the original and protected datasets, i.e. such that weights (values of likelihood that two paired records refer to the same respondent assigned by a special algorithm) are greater than an arbitrarily established threshold.
+
 One can easily observe that in both cases also original and protected data sets are compared. This makes it impossible to assess the original risk of disclosure, which is usually the basis of any data disclosure control activities.
 
 ### Possibility of complex measurement of disclosure risk
@@ -203,9 +205,13 @@ $$
 
 where $\sum\limits_{i:k(i)=k}^{}w_{i}$ is an estimate of $F_k$ based on the sampling design weights $w_i$, possibly calibrated (Deville and Särndal, 1992).
 
+#### When is it possible to apply the individual risk estimation
+
 The procedure relies on the assumption that the available data are a sample from a larger population. *If the sampling weights are not available, or if data represent the whole population, the strategy used to estimate the individual risk is not meaningful*.
 
-In the μ‑ARGUS manual (Hundepool *et al.*, 2004) a fully detailed description of the approach is reported. This brief note is based on Polettini (2004).
+In the μ‑ARGUS manual (de Wolf *et al.*, 2014) a fully detailed description of the approach is reported. This brief note is based on Polettini and Seri (2004).
+
+#### Assessing the risk for the whole file
 
 The individual risk provides a measure of risk *at the individual level*. A *global* measure of disclosure risk for the whole file can be expressed in terms of the expected number of re-identifications in the file. The *expected number of re*-*identifications* is a measure of disclosure that depends on the number of records. For this reason, μ‑ARGUS evaluates also the *re‑identification rate* that is independent of $n$:
 
@@ -213,9 +219,11 @@ $$
 \xi = \frac{1}{n}\sum\limits_{k=1}^{K}{f_{k}r_{k}} \quad .
 $$
 
-$\xi$ provides a measure of *global risk, i.e.* a measure of disclosure risk for the whole file, which does not depend on the sample size and can be used to assess the risk of the file or to compare different types of release; for the mathematical details see Polettini (2004).
+$\xi$ provides a measure of *global risk, i.e.* a measure of disclosure risk for the whole file, which does not depend on the sample size and can be used to assess the risk of the file or to compare different types of release; for the mathematical details see Polettini and Seri (2004).
 
 The *percentage of expected re-identifications*, i.e. the value $\psi=100\cdot\xi\%$ provides an equivalent measure of global risk.
+
+#### Application of local suppression within the individual risk methodology
 
 After the risk has been estimated, protection takes place. One option in protection is the application of *local suppression* (see Section 3.4.3.4).
 
@@ -225,13 +233,19 @@ In order to select the risk threshold, that represents a level of *acceptable ri
 
 In order to reduce the number of local suppressions, the procedure of releasing a safe file considers preliminary steps of protection using techniques such as *global recoding* (see Section 3.4.3.2). Recoding of selected variables will indeed lower the individual risk and therefore the re-identification rate of the file.
 
-Consider the re-identification rate $\xi$: a key $k$ contributes to $\xi$ an amount $r_kf_k$ of expected re‑identifications. Since units belonging to the same key $k$ have the same individual risk, keys can be arranged in increasing order of risk $r_k$. Let the subscript ($k$) denotes the $k$-th element in this ordering. A threshold $r^*$ on the individual risk can be set. Consequently, unsafe cells are those for which $r_{k} \geq r^*$ that can be indexed by $(k) = k^{*} + 1,\ldots,K$. The key $k^{*}$ is in a one-to-one correspondence to $r^{*}$. This allows setting an upper bound $\xi^{*}$ on the re‑identification rate of the released file (after data protection) substituting $r_kf_k$ with $r^{*}f_{(k)}$ for each ($k$). For the mathematical details see Polettini (2004) and the Argus manual (Hundepool *et al.*, 2004).
+####Threshold setting using the re-identification rate
+
+Consider the re-identification rate $\xi$: a key $k$ contributes to $\xi$ an amount $r_kf_k$ of expected re‑identifications. Since units belonging to the same key $k$ have the same individual risk, keys can be arranged in increasing order of risk $r_k$. Let the subscript ($k$) denotes the $k$-th element in this ordering. A threshold $r^*$ on the individual risk can be set. Consequently, unsafe cells are those for which $r_{k} \geq r^*$ that can be indexed by $(k) = k^{*} + 1,\ldots,K$. The key $k^{*}$ is in a one-to-one correspondence to $r^{*}$. This allows setting an upper bound $\xi^{*}$ on the re‑identification rate of the released file (after data protection) substituting $r_kf_k$ with $r^{*}f_{(k)}$ for each ($k$). For the mathematical details see Polettini and Seri (2004) and the Argus manual (de Wolf *et al.*, 2014).
 
 The approach pursued so far can be reversed. Therefore, selecting a *threshold* $\tau$ *on the re-identification rate* $\xi$ determines a key index $k^{*}$ which corresponds to a value for $r^{*}$. Using $r^{*}$ as a threshold for the individual risk keeps the re‑identification rate $\xi$ of the released file below $\tau$. The search of such a $k^{*}$ is performed by a simple iterative algorithm.
+
+#### Releasing hierarchical files
 
 A relevant characteristic of social microdata is its inherent hierarchical structure, which allows us to recognise groups of individuals in the file, the most typical case being the *household*. When defining the re-identification risk, it is important to take into account this dependence among units: indeed re-identification of an individual in the group may affect the probability of disclosure of all its members. So far, implementation of a hierarchical risk has been performed only with reference to households, i.e. a *household risk*.
 
 Allowing for dependence in estimating the risk enables us to attain a higher level of safety than when merely considering the case of independence.
+
+#### The household risk
 
 The household risk makes use of the same framework defined for the individual risk. In particular, the concept of re-identification holds with the additional assumption that *the intruder attempts a confidentiality breach by re-identification of individuals in households*.
 
@@ -243,7 +257,7 @@ $$
 
 and is the same for all the individuals in household $g$ and equals $r_{g}^{h}$.
 
-Since all the individuals in a given household have the same household risk, the expected number of re‑identified records in household $g$ equals $|g|r_{g}^{h}$. The re‑identification rate in a hierarchical file can be then defined as $\xi^{h} = \frac{1}{n}\sum\limits_{g=1}^{G}{|g|r_{g}^{h}}$, where $G$ is the total number of households in the file. The re‑identification rate can be used to define a threshold $r^{h^{\ast}}$ on the household risk $r^{h}$, much in the same way as for the individual risk. For the mathematical details see Polettini (2004) and the Argus manual (Hundepool *et al.*, 2004).
+Since all the individuals in a given household have the same household risk, the expected number of re‑identified records in household $g$ equals $|g|r_{g}^{h}$. The re‑identification rate in a hierarchical file can be then defined as $\xi^{h} = \frac{1}{n}\sum\limits_{g=1}^{G}{|g|r_{g}^{h}}$, where $G$ is the total number of households in the file. The re‑identification rate can be used to define a threshold $r^{h^{\ast}}$ on the household risk $r^{h}$, much in the same way as for the individual risk. For the mathematical details see Polettini and Seri (2004) and the Argus manual (de Wolf *et al.*, 2014).
 
 Note that the household risk $r_{g}^{h}$ of household $g$ is computed by the individual risks of its household members. For a given household, it might happen that a household is unsafe ($r_{g}^{h}$ exceeds the threshold) because just one of its members, $i$, say, has a high value $r_{i}$ of the individual risk. To protect the households, the followed approach is therefore to protect individuals in households, first protecting those individuals who contribute most to the household risk. For this reason, inside *unsafe households*, detection of *unsafe individuals* is needed. In other words, the threshold on the household risk $r^{h}$ has to be transformed into a threshold on the individual risk $r_{i}$. To this aim, it can be noticed that the household risk is bounded by the sum of the individual risks of the members of the household: $r_{g}^{h} \leq \sum\limits_{j=1}^{|g|}r_{i_{j}}$.
 
@@ -261,13 +275,15 @@ $$
 
 *Individuals* are finally set to unsafe whenever $r_{i} \geq \delta_{g(i)}$; local suppression is then applied to those records, if requested. Suppression of these records ensures that after protection the household risk is below the threshold $\delta_{g}$.
 
+#### Choice of identifying variables in hierarchical files
+
 For household data it is important to include in the identifying variables that are used to estimate the household risks also the available information on the household, such as the number of components or the household type.
 
-Suppose one computes the risk using the household size as the only identifying variable in a household data file, and that such file contains households whose risk is above a fixed threshold. Since information on the number of components in the household cannot be removed from a file with household structure, these records cannot be safely released, and no suppression can make them safe. This permits to check for presence of very peculiar households (usually, the very large ones) that can be easily recognised in the population just by their size and whose main characteristic, namely their size, can be immediately computed from the file. For a discussion on this issue see Polettini (2004).
+Suppose one computes the risk using the household size as the only identifying variable in a household data file, and that such file contains households whose risk is above a fixed threshold. Since information on the number of components in the household cannot be removed from a file with household structure, these records cannot be safely released, and no suppression can make them safe. This permits to check for presence of very peculiar households (usually, the very large ones) that can be easily recognised in the population just by their size and whose main characteristic, namely their size, can be immediately computed from the file. For a discussion on this issue see Polettini and Seri (2004).
 
 ### The Poisson model with log-linear modelling
 
-As defined in Skinner and Elamir (2004), assuming that the $F_{k}$ are independently Poisson distributed with means $\left\{\lambda_{k} \right\}$ and assuming a Bernoulli sampling scheme with equal selection probably $\pi$, then $f_{k}$ and $F_{k} - f_{k}$ are independently Poisson distributed as: $f_{k} \mid \lambda_{k} \sim \operatorname{Pois} \left(\pi\lambda_{k} \right)$ and $F_{k} - f_{k} \mid \lambda_{k} \sim \operatorname{Pois} \left( ( 1 - \pi ) \lambda_{k} \right)$ . The individual risk measure for a sample unique is defined as $r_{k} = E_{\lambda_{k}} \left( \frac{1}{F_{k}} \mid f_{k} = 1 \right)$ which is equal to: ![](Images/media/image18.png){width="0.2in" height="0.2in"}
+As defined in Elamir and Skinner (2004), assuming that the $F_{k}$ are independently Poisson distributed with means $\left\{\lambda_{k} \right\}$ and assuming a Bernoulli sampling scheme with equal selection probably $\pi$, then $f_{k}$ and $F_{k} - f_{k}$ are independently Poisson distributed as: $f_{k} \mid \lambda_{k} \sim \operatorname{Pois} \left(\pi\lambda_{k} \right)$ and $F_{k} - f_{k} \mid \lambda_{k} \sim \operatorname{Pois} \left( ( 1 - \pi ) \lambda_{k} \right)$ . The individual risk measure for a sample unique is defined as $r_{k} = E_{\lambda_{k}} \left( \frac{1}{F_{k}} \mid f_{k} = 1 \right)$ which is equal to: ![](Images/media/image18.png){width="0.2in" height="0.2in"}
 
 $$
 r_{k} = \frac{1}{\lambda_{k} (1 - \pi) } \left[ 1 - e^{ - \lambda_{k} (1 - \pi) } \right]
@@ -303,23 +319,23 @@ In each local neighbourhood of cell *k* a smoothing polynomial regression model 
 
 ### SUDA
 
-The Special Uniques Detection Algorithm (SUDA) (Elliot et.al., 2005) is a software system (windows application available as freeware under restricted licence) that provides disclosure risk broken down by record, variable, variable value and by interactions of those. It is based on the concept of a "special unique". A special unique is a record that is a sample unique on a set of variables and that is also unique on a subset of those variables. Empirical work has shown that special uniques are more likely to be population unique than random uniques. Special uniques can be classified according to the size and number of the smallest subset of key variables that defines the record as unique, known as minimal sample uniques (MSU). In the algorithm, all MSUs are found for each record on all possible subsets of the key variables where the maximum size of the subsets *m* is specified by the user. ![](Images/media/image20.png){width="0.2in" height="0.2in"}
+The Special Uniques Detection Algorithm (SUDA) (Elliot *et.al.*, 2005) is a software system (windows application available as freeware under restricted licence) that provides disclosure risk broken down by record, variable, variable value and by interactions of those. It is based on the concept of a "special unique". A special unique is a record that is a sample unique on a set of variables and that is also unique on a subset of those variables. Empirical work has shown that special uniques are more likely to be population unique than random uniques. Special uniques can be classified according to the size and number of the smallest subset of key variables that defines the record as unique, known as minimal sample uniques (MSU). In the algorithm, all MSUs are found for each record on all possible subsets of the key variables where the maximum size of the subsets *m* is specified by the user. ![](Images/media/image20.png){width="0.2in" height="0.2in"}
 
-SUDA grades and orders records within a microdata file according to the level of risk. The method assigns a per record matching probability to a sample unique based on the number and size of minimal uniques. The DIS Measure (Skinner and Elliot, 2000) is the conditional probability of a correct match given a unique match:
+SUDA grades and orders records within a microdata file according to the level of risk. The method assigns a per record matching probability to a sample unique based on the number and size of minimal uniques. The DIS Measure (Elliot, 2000) is the conditional probability of a correct match given a unique match:
 
 $$
 p(cm \mid um) = \frac{\sum\limits_{k = 1}^{K} I\left(f_{k} = 1 \right)}{\sum\limits_{k = 1}^{K} F_{k} I \left(f_{k} = 1 \right) }
 $$
 
-and is estimated by a simple sample-based measure which is approximately unbiased without modelling assumptions. Elliot (2005) describes a heuristic which combines the DIS measure with scores resulting from the algorithm (i.e., SUDA scores). This method known as DIS-SUDA produces estimates of intruder confidence in a match against a given record being correct. This is closely related to the probability that the match is correct and is heuristically linked to the estimate of
+and is estimated by a simple sample-based measure which is approximately unbiased without modelling assumptions. Elliot *et al.* (2005) describe a heuristic which combines the DIS measure with scores resulting from the algorithm (i.e., SUDA scores). This method known as DIS-SUDA produces estimates of intruder confidence in a match against a given record being correct. This is closely related to the probability that the match is correct and is heuristically linked to the estimate of
 
 $$
 \tau_2 = \sum\limits_k{I(f_k=1)\frac{1}{F_k}}
 $$
 
-The advantage of this method is that it relates to a practical model of data intrusion, and it is possible to compare different values directly. The disadvantages are that it is sensitive to level of the max MSU parameter and is calculated in a heuristic manner. In addition it is difficult to compare disclosure risk across different files. However, the method has been extensively tested and was used successfully for the detection of high-risk records in the UK Sample of Anonymized Records (SAR) drawn from the 2001 Census (Merrett, 2004). The assessment showed that the DIS-SUDA measure calculated from the algorithm provided a good estimate for the individual disclosure risk measure, especially for the case when the number of key variables, $m = 6$. The algorithm also identifies the variables and value of variables that are contributing most to the disclosure risk of the record.
+The advantage of this method is that it relates to a practical model of data intrusion, and it is possible to compare different values directly. The disadvantages are that it is sensitive to level of the max MSU parameter and is calculated in a heuristic manner. In addition it is difficult to compare disclosure risk across different files. However, the method has been extensively tested and was used successfully for the detection of high-risk records in the UK Sample of Anonymized Records (SAR) drawn from the 2001 Census (Bycroft and Merrett, 2005). The assessment showed that the DIS-SUDA measure calculated from the algorithm provided a good estimate for the individual disclosure risk measure, especially for the case when the number of key variables, $m = 6$. The algorithm also identifies the variables and value of variables that are contributing most to the disclosure risk of the record.
 
-A new algorithm, SUDA2 has been developed, Elliot et al (2005), that improves SUDA using several methods. The development provides a much faster tool that can handle larger datasets.
+A new algorithm, SUDA2 has been developed, Elliot *et al.*, (2005), that improves SUDA using several methods. The development provides a much faster tool that can handle larger datasets.
 
 ### Record Linkage
 
@@ -327,7 +343,7 @@ Roughly speaking, record linkage consists of linking each record $a$ in file $A$
 
 To apply this method to measure the risk of identity disclosure, it is assumed that an intruder has got an external dataset sharing some (key or outcome) variables with the released protected dataset and containing additionally some identifier variables (*e.g.* passport number, full name, etc.). The intruder is assumed to try to link the protected dataset with the external dataset using the shared variables. The number of matches gives an estimation of the number of protected records whose respondent can be re-identified by the intruder. Accordingly, disclosure risk is defined as the proportion of matches among the total number of records in $A$.
 
-The main types of record linkage used to measure identity disclosure in SDC are discussed below. An illustrative example can be found on the CASC-website as one of the case-studies linked to this handbook (see [[section handbook]{.underline}](http://neon.vb.cbs.nl/casc/handbook.htm)).
+The main types of record linkage used to measure identity disclosure in SDC are discussed below. An illustrative example can be found on the CASC-website as one of the case-studies linked to this handbook (see [[section handbook]{.underline}](https://research.cbs.nl/casc/Software/TauManualV4.1.pdf)).
 
 #### Distance-based record linkage
 
@@ -337,7 +353,7 @@ Distance-based record linkage was first proposed in Pagliuca and Seri (1999) to 
 
 The record linkage algorithm introduced in (Bacher, Brand and Bender, 2002) is similar in spirit to distance-based record linkage. This is so because it is based on cluster analysis and, therefore, links records that are near to each other.
 
-The main advantages of using distances for record linkage are simplicity for the implementer and intuitiveness for the user. Another strong point is that subjective information (about individuals or variables) can be included in the re-identification process by properly modifying distances. In fact, the next version of the μ‑ARGUS microdata protection package (Hundepool et al., 2005) will incorporate distance-based record linkage as a disclosure risk assessment method.
+The main advantages of using distances for record linkage are simplicity for the implementer and intuitiveness for the user. Another strong point is that subjective information (about individuals or variables) can be included in the re-identification process by properly modifying distances. In fact, the next version of the μ‑ARGUS microdata protection package (de Wolf *et al.*, 2014) will incorporate distance-based record linkage as a disclosure risk assessment method.
 
 The main difficulty of distance-based record linkage consists of coming up with appropriate distances for the variables under consideration. For one thing, the weight of each variable must be decided and this decision is often not obvious. Choosing a suitable distance is also especially thorny in the cases of categorical variables and of masking methods such as local recoding where the masked file contains new labels with respect to the original dataset.
 
@@ -355,14 +371,16 @@ Probabilistic record linkage methods are less simple than distance-based ones. H
 
 #### Other record linkage methods
 
-> Recently, the use of other record linkage methods has also been considered for disclosure risk assessment. While in the previous record linkage methods it is assumed that the two files to be linked share a set of variables, other methods have been developed where this constraint is relaxed. Under appropriate conditions, (Torra, 2004) shows that re-identification is still possible when files do not share any variables. Domingo-Ferrer and Torra (2003) propose the use of such methods for disclosure risk assessment. ![](Images/media/image25.png){width="0.2in" height="0.2in"}
+Recently, the use of other record linkage methods has also been considered for disclosure risk assessment. While in the previous record linkage methods it is assumed that the two files to be linked share a set of variables, other methods have been developed where this constraint is relaxed. Under appropriate conditions, (Torra, 2004) shows that re-identification is still possible when files do not share any variables. Domingo-Ferrer and Torra (2003) propose the use of such methods for disclosure risk assessment. ![](Images/media/image25.png){width="0.2in" height="0.2in"}
 
 ### Concepts and types of information loss and its measures
 
 The application of SDC methods entails the loss of some information. It arises as a result e.g. from gaps occurring in data when non-perturbative SDC methods are used, or perturbations when perturbative SDC tools are used. Because of this loss the analytical worth of the disclosed data for the user decreases, which means there is a possibility that results of computations and analyses based on such data will be inadequate (e.g. the precision of estimation could be much worse). 
 
 A strict evaluation of information loss must be based on the data uses to be supported by the protected data. The greater the differences between the results obtained on original and protected data for those uses, the higher the loss of information. However, very often microdata protection cannot be performed in a data use specific manner, for the following reasons:
+
 • potential data uses are very diverse and it may be even hard to identify them all at the moment of data release by the data protector.
+
 • even if all data uses can be identified, issuing several versions of the same original dataset so that the *i*-th version has an information loss optimized for the *i*-th data use may result in unexpected disclosure.
 
 Since that data often must be protected with no specific data use in mind, generic information loss measures are desirable to guide the data protector in assessing how much harm is being inflicted to the data by a particular SDC technique.
@@ -370,8 +388,11 @@ Since that data often must be protected with no specific data use in mind, gener
 Defining what a generic information loss measure is can be a difficult issue. Roughly speaking, it should capture the amount of information loss for a reasonable range of data uses. We will say there is little information loss if the protected dataset is analytically valid and interesting according to the following definitions by Winkler (1998):
 
 1. A protected microdata set is an *analytically valid* microdata set if it approximately preserves the following with respect to the original data (some conditions apply only to continuous variables):
+
 • means and covariances on a small set of subdomains (subsets of records and/or variables),
+
 • marginal values for a few tabulations of the data (the information loss in this approach concerns mainly tables created on the basis of microdata and therefore it will be discussed in chapters 4 and 5),
+
 • at least one distributional characteristic.
 
 2. A microdata set is an *analytically interesting microdata set,* if six variables on important subdomains are provided that can be validly analyzed.
@@ -386,7 +407,9 @@ Defining what a generic information loss measure is can be a difficult issue. Ro
 
 1. Measures of distribution disturbance – measures based on distances between original and perturbed values of variables (e.g. mean, mean of relative
 distances, complex distances, etc.),
+
 2. Measures of impact on variance of estimation – computed using distances between variances for averages of continuous variables before and after SDC or multi-factor ANOVA for a selected dependent variable in relation to selected independent categorical variables (in this case, the measure of information loss involves a comparison of components of coefficients of determination $R^2$ - in terms of within-group and inter-group variance - for relevant models based on original and perturbed values (cf. Hundepool et al. (2012)),
+
 3. Measures of impact on the intensity of connections – comparisons of measures of direction and intensity of connections between original continuous variables and between relevant perturbed ones; such measures can be e.g. correlation coefficients or test of independence.
 
 ### Information loss measures for categorical data
@@ -550,22 +573,41 @@ Similarly as e.g. in the case of significance and loss in testing of statistical
 In practice, the data holder (e.g. official statistics) prefers rather the first approach as the strict protection of data privacy is usually an obligation imposaed by valid law regulations. So, assurance of the safety of confidential information is very important.     
 
 ### References
+
+Bacher J., Brand R., and Bender S. (2002), *Re-identifying register data by survey data using cluster analysis: an empirical study*. International Journal of Uncertainty, Fuzziness and Knowledge Based Systems, 10(5):589--607, 2002.
+
 Benedetti, R. and Franconi, L. (1998). *Statistical and technological solutions for controlled data dissemination,* Pre-proceedings of New Techniques and Technologies for Statistics, 1, 225-232.
+
+Bycroft, C., and Merrett, K. (2005). *Experience of using a post randomisation method at the office for national statistics*. Monographs of official statistics, 125.
 
 Chatfield, C., and Collins, A. J., (1980). *Introduction to Multivariate Analysis*, Chapman and Hall, London, 1980.
 
 Dandekar, R., Domingo-Ferrer, J., and Sebé, F., (2002). *LHS-based hybrid microdata vs. rank swapping and microaggregation for numeric microdata protection.* In J. Domingo-Ferrer, editor, Inference Control in Statistical Databases, volume 2316 of LNCS, pages 153--162, Berlin Heidelberg, 2002. Springer.
 
+Dempster A. P., Laird N. M., and Rubin D. B. (1977), *Maximum likelihood from incomplete data via the em algorithm.* Journal of the Royal Statistical Society, 39:1--38, 1977.
+
+Deville, J.C. and Särndal, C.E. (1992). *Calibration estimators in survey sampling,* Journal of the American Statistical Association 87, 367--382.
+
 De Waal, A. G., and Willenborg, L. C. R. J. (1999). *Information loss through global recoding and local suppression.* Netherlands Official Statistics, 14:17--20, 1999. special issue on SDC.
+
+De Wolf, P.-P., Hundepool, A., Giessing, S., Salazar, J.-J., and  Castro, J. (2014), *µ-ARGUS version 4.1 User's Manual*. Statistics Netherlands, Voorburg NL, November 2014. [[https://research.cbs.nl/casc/]{.underline}](https://research.cbs.nl/casc/Software/TauManualV4.1.pdf).
 
 Domingo-Ferrer, J., Mateo-Sanz, J. M., and Torra, V. (2001). *Comparing sdc methods for microdata on the basis of information loss and disclosure risk*. In Pre-proceedings of ETK-NTTS'2001 (vol. 2), pages 807--826, Luxemburg, 2001. Eurostat.
 
 Domingo-Ferrer, J., and Torra, V. (2001). *Disclosure protection methods and information loss for microdata.* In P. Doyle, J. I. Lane, J. J. M. Theeuwes, and L. Zayatz, editors, Confidentiality, Disclosure and Data Access: Theory and Practical Applications for Statistical Agencies, pages 91--110, Amsterdam, 2001. North-Holland. [[http://vneumann.etse.urv.es/publications/bcpi]{.underline}](http://vneumann.etse.urv.es/publications/bcpi).
 
+Domingo-Ferrer, J., and Torra, V. (2003), *Disclosure risk assessment in statistical microdata protection via advanced record linkage.* Statistics and Computing, 13:343--354.
+
 Elamir, E., Skinner, C. (2004) *Record-level Measures of Disclosure Risk for Survey Microdata,* Journal of Official Statistics (forthcoming). See also: Southampton Statistical Sciences Research Institute, University of Southampton, methodology working paper:\
 [[http://eprints.soton.ac.uk/8175/01/s3ri-workingpaper-m04-02.pdf]{.underline}](http://eprints.soton.ac.uk/8175/01/s3ri-workingpaper-m04-02.pdf)
 
+Elliot, M. J., (2000). *DIS: A new approach to the Measurement of Statistical Disclosure Risk.* International Journal of Risk Management 2(4), pp 39-48.
+
 Elliot, M. J., Manning, A. M.& Ford, R. W. (2002**).** \'*A Computational Algorithm for Handling the Special Uniques Problem*\'. International Journal of Uncertainty, Fuzziness and Knowledge Based Systems 5(10), pp 493-509.
+
+Elliot, M. J., Manning, A., Mayes, K., Gurd, J. & Bane, M. (2005). '*SUDA: A Program for Detecting Special Uniques'.* Proceedings of the UNECE/Eurostat work session on statistical data confidentiality, Geneva, November 2005.
+
+Fellegi, I. P., and Sunter, A.B. (1969), *A theory for record linkage*. Journal of the American Statistical Association, 64(328):1183--1210.
 
 Franconi, L. and Polettini, S. (2004). *Individual risk estimation in µ-ARGUS: a review.* In: Domingo-Ferrer, J. (Ed.), Privacy in Statistical Databases. Lecture Notes in Computer Science. Springer, 262‑272
 
@@ -583,6 +625,8 @@ Młodak, A., Pietrzak, M., & Józefowski, T. (2022). The trade–off between the
 
 Pagliuca, D., & Seri, G. (1999). Some results of individual ranking method on the system of enterprise accounts annual survey. *Esprit SDC Project, Deliverable MI-3 D, 2*.
 
+Polettini, S. and Seri, G (2004). *Revision of "Guidelines for the protection of social microdata using the individual risk methodology*". Deliverable 1.2-D3, available at CASC web site.
+
 *R Development Core Team. (2008). R: A Language and Environment for Statistical Computing [Computer software manual]*. Vienna, Austria. Retrieved from http://www.R-project.org (ISBN 3-900051-07-0)
 
 Sayers, A., Ben-Shlomo, Y., Blom, A. W., & Steele, F. (2016). Probabilistic record linkage. *International Journal of Epidemiology*, 45(3), 954-964.
@@ -593,15 +637,25 @@ Shlomo, N., & Skinner, C. (2022). Measuring risk of re-identification in microda
 
 Skinner, C., Holmes, D. (1998), *Estimating the re-identification risk per record in microdata,* JOS, Vol.14.
 
+Skinner, C., Shlomo, N. (2005), *Assessing disclosure risk in microdata using record-level measures,* proceedings of the UNECE/Eurostat work session on statistical data confidentiality, Geneva, November 2005
+
+Skinner, C., Shlomo, N. (2006) *Assessing Identification Risk in Survey Microdata Using Log-linear Models,* see: <http://eprints.soton.ac.uk/41842/01/s3ri-workingpaper-m06-14.pdf>
+
 Taylor, L., Zhou, X.-H., & Rise, P. (2018). A tutorial in assessing disclosure risk in microdata. *Statistics in Medicine*, 37 (25), 3693–3706.
 
 Templ, M. (2017). *Statistical Disclosure Control for Microdata. Methods and Applications in R.* Springer International Publishing AG, Cham, Switzerland.
 
 Templ, M., Kowarik, A., & Meindl, B. (2023). *sdcMicro: Statistical Disclosure Control Methods for Anonymization of Data and Risk Estimation. Manual and Package.* R package version 5.7.5 [Computer software manual]. (http://CRAN.R-project.org/package=sdcMicro)
 
+Torra, V. (2004), *Owa operators in data modeling and re-identification.* IEEE Trans. on Fuzzy Systems, vol. 12, no. 5, pp. 652-660.
+
+Torra, V., and Miyamoto, S. (2004),. *Evaluating fuzzy clustering algorithms for microdata protection.* In J. Domingo-Ferrer and V. Torra, editors, Privacy in Statistical Databases, volume 3050 of LNCS, pages 175--186, Berlin Heidelberg. Springer.
+
 Trottini, M. (2003) . *Decision models for data disclosure limitation*. PhD thesis, Carnegie Mellon University, 2003. [[http://www.niss.org/dgii/TR/Thesis-Trottini-final.pdf]{.underline}](http://www.niss.org/dgii/TR/Thesis-Trottini-final.pdf).
 
 Willenborg, L., and DeWaal, T., (2001). *Elements of Statistical Disclosure Control*. Springer-Verlag, New York, 2001.
+
+Winkler, W. E. (1993),. *Matching and record linkage.* Technical Report RR93/08, Statistical Research Division, U. S. Bureau of the Census (USA), 1993.
 
 Winkler, W. E. (1998). *Re-identification methods for evaluating the confidentiality of analytically valid microdata.* In J. Domingo-Ferrer, editor, Statistical Data Protection, Luxemburg, 1999. Office for Official Publications of the European Communities. (Journal version in Research in Official Statistics, vol. 1, no. 2, pp. 50-69, 1998).
 
