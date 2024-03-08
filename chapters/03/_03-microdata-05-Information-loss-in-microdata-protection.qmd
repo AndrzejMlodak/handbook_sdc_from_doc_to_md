@@ -2,7 +2,7 @@
 
 ### Introduction
 
-The key aim of the Statistical Disclosure Control is to achieve optimal balance between minimization of disclosure risk and simultaneous minimization of the information loss arising from the SDC process (what is equivalent to maximization of data utility for the possible users). So, both aspects of this problem will be described and critically discussed in this subchapter. We will present types of disclosure risk, show how one can measure of disclosure risk for categorical variables and continuous variables. Because usually for each of such types separate measures are applied, we investigate also a possibility of complex measurement of disclosure risk taking them jointly into account. A similar approach was also applied to measures of information loss: types of information loss and its measures for categorical and continuous variables are presented and next complex measures providing synthetic information in this respect are discussed. They are available already in the literature and implemented to the specialized statistical software. Finally, some remarks on the practical realization of trade-off between safety and utility of microdata are collected.
+The key aim of the Statistical Disclosure Control is to achieve optimal balance between minimization of disclosure risk and simultaneous minimization of the information loss arising from the SDC process (what is equivalent to maximization of data utility for the possible users). So, both aspects of this problem will be described and critically discussed in this subchapter. We will present basic concepts and types of disclosure risk and show how one can measure of disclosure risk for categorical variables and continuous variables. Because usually for each of such types separate measures are applied, we investigate also a possibility of complex measurement of disclosure risk taking them jointly into account. A similar approach was also applied to measures of information loss: types of information loss and its measures for categorical and continuous variables are presented and next complex measures providing synthetic information in this respect are discussed. They are available already in the literature and implemented to the specialized statistical software. Finally, some remarks on the practical realization of trade-off between safety and utility of microdata are collected and illustrated by relevant example.
 
 ### General remarks on disclosure risk
 
@@ -18,17 +18,7 @@ Intuitively, a unit is at risk if we are able to single it out from the rest. Th
 
 When the identifying variables are categorical (as it is usually the case in social surveys) the risk is cast in terms of the cells of the contingency table built by cross-tabulating the identifying variables: the keys. Consequently all the records in the same cell have the same value of the risk.
 
-*A classification of risk measures*
-
-Several definitions of risk have been proposed in the literature. Here we focus mainly on those for which tools are available to compute/estimate them easily. The classification of risk depends largely on the assumed criterion. We will present types of risk based on data which the intruder has access to (internal risk, external risk) or the data structure (global, individual or hierarchical risk). 
-
-We can broadly classify disclosure risk measures also into three types: risk measures based on keys in the sample, those based on keys in the population and that make use of statistical models or heuristics to estimate the quantities of interest and those based on the theory of record linkage. Whereas the first two classes in this classification are devoted to risk assessment for categorical identifying variables the third one may be used for categorical and continuous variables. For the first class of risk in this typology measures a unit is at risk if its combination of scores on the identifying variables is below a given threshold. The threshold rule used within the software package μ‑ARGUS, as presented in Section 3.6.1, is an example of this class of risk measures. For the second type of approach we are concerned with the risk of a unit as determined by its combination of scores on the identifying variables within the population or its probability of re-identification. The idea then is that a unit is at risk if such quantity is above a given threshold. Because the frequency in the population is generally unknown, it may be estimated through a modelling process. Examples of this reasoning are the individual risk of disclosure based on the Negative Binomial distribution developed by Benedetti and Franconi (1998) and Franconi and Polettini (2004), which is outlined in Section 3.5.5, and the one based on the Poisson distribution and log-linear models developed by Skinner and Holmes (1998) and Elamir and Skinner (2004) which is described in Section 3.5.6 along with current research on other probabilistic methods. Another approach based on keys in the population is the Special Uniques Detection (SUDA) Algorithm developed by Elliot et al. (2002) that uses a heuristic method to estimate the risk; this is outlined in Section 3.5.7.
-
-*Risk based on record linkage*
-
-When identifying variables are continuous we cannot exploit the concept of rareness of the keys and we transform such concept into rareness in the neighbourhood of the record. A way to measure rareness in the neighbourhood is through record linkage techniques. This third class of disclosure risk is covered in Section 3.5.8. Section 3.5.3 provides an introduction to disclosure risk scenarios. Section 3.5.4 introduces concepts and notation used throughout this chapter whereas Section 3.5.5 discusses the most important classifications of disclosure risk types based on various criterions.  
-
-. Sections to 3.3.8 describe different approaches to microdata risk assessment as specified above. However, as microdata risk assessment is a novelty in statistical research there isn't yet agreement on what method is the best, or at least best under given circumstances. In the following sections we comment on various approaches to risk measures and try to give advice on situations where they could or could not be applied. In any case, it has been recognised that research should be undertaken to evaluate these different approaches to microdata risk assessment, see for example Shlomo and Barton (2006).
+Section 3.5.3 provides an introduction to disclosure risk scenarios. Section 3.5.4 introduces concepts and notation used throughout this chapter whereas Section 3.5.5 discusses the most important classifications of disclosure risk types based on various criterions. Sections from 3.5.6 to 3.5.13 describe different approaches to microdata risk assessment as specified above. However, as microdata risk assessment is a novelty in statistical research there isn't yet agreement on what method is the best, or at least best under given circumstances. In the following sections we comment on various approaches to risk measures and try to give advice on situations where they could or could not be applied. In any case, it has been recognised that research should be undertaken to evaluate these different approaches to microdata risk assessment, see for example Shlomo and Barton (2006).
 
 The focus of these methods and this section of the handbook is for microdata samples from social surveys. For microdata samples from censuses or registers the disclosure risk is known. Business survey microdata are not typically released due to their disclosive nature (skewed distributions and very high sampling fractions).
 
@@ -116,7 +106,9 @@ We assume that the $f_k$ are observed but the $F_k$ are not observed.
 
 ### Types of disclosure risk
 
-The assessment of the risk of re-identification using disclosed data involves identifying unsafe combinations for categorical variables or their values in the neighbourhood of relevant original values (for continuous variables) or levels (individual, global or hierarchical). The unsafe combinations of values of categorical variables are recognized using e.g. the $k$-anonymity or $l$-diversity rules. It is possible also when the $t$-closeness criterion is applied: in this case all records - and themselves the combinations of values of categorical variables – belonging to unsafe class are regarded to be unsafe. There are several criteria to classify the risk. We present the most important from them.
+The assessment of the risk of re-identification using disclosed data involves identifying unsafe combinations (for categorical variables) or their values in the neighbourhood of relevant original values (for continuous variables) or levels (individual, global or hierarchical). The unsafe combinations of values of categorical variables are recognized using e.g. the $k$-anonymity or $l$-diversity rules. It is possible also when the $t$-closeness criterion is applied: in this case all records - and themselves the combinations of values of categorical variables – belonging to unsafe class are regarded to be unsafe. 
+
+Several definitions of risk and several criteria to classify the risk have been proposed in the literature. Here we focus mainly on those for which tools are available to compute/estimate them easily. The classification of risk depends largely on the assumed criterion. We will present most important types of risk based on data which the intruder has access to or the data structure.
 
 Due to the range of data that can be used to identify the individual one can distinguish two types of disclosure risk for a dataset obtained once the SDC process has been applied (cf. Młodak, Pietrzak and Józefowski (2022)):
 
@@ -140,7 +132,13 @@ Another classification of disclosure risk is connected with the reference object
 
     • global risk - the aggregated disclosure risk for the whole data set.
 
-The statistician involved in processing and dissemination of data should estimate disclosure risk at each stage of the SDC process. It allows to track changes and efficiency of data protection made using various SDC methods and taking all relevant data struktures into account. Due to the fact, that information on the disclosure risk can contribute to re-identification of individuals, it should be, however, confidential itself and cannot be known by the user.
+We can broadly classify disclosure risk measures also into three types: risk measures based on keys in the sample, those based on keys in the population and that make use of statistical models or heuristics to estimate the quantities of interest and those based on the theory of record linkage. Whereas the first two classes in this classification are devoted to risk assessment for categorical identifying variables the third one may be used for categorical and continuous variables. For the first class of risk in this typology measures a unit is at risk if its combination of scores on the identifying variables is below a given threshold. The threshold rule used within the software package μ‑ARGUS, as presented in Section 3.6.1, is an example of this class of risk measures. For the second type of approach we are concerned with the risk of a unit as determined by its combination of scores on the identifying variables within the population or its probability of re-identification. The idea then is that a unit is at risk if such quantity is above a given threshold. Because the frequency in the population is generally unknown, it may be estimated through a modelling process. Examples of this reasoning are the individual risk of disclosure based on the Negative Binomial distribution developed by Benedetti and Franconi (1998) and Franconi and Polettini (2004), which is outlined in Section 3.5.5, and the one based on the Poisson distribution and log-linear models developed by Skinner and Holmes (1998) and Elamir and Skinner (2004) which is described in Section 3.5.6 along with current research on other probabilistic methods. Another approach based on keys in the population is the Special Uniques Detection (SUDA) Algorithm developed by Elliot et al. (2002) that uses a heuristic method to estimate the risk; this is outlined in Section 3.5.7.
+
+*Risk based on record linkage*
+
+When identifying variables are continuous we cannot exploit the concept of rareness of the keys and we transform such concept into rareness in the neighbourhood of the record. A way to measure rareness in the neighbourhood is through record linkage techniques. This third class of disclosure risk is covered in Section 3.5.8.
+
+The statistician involved in processing and dissemination of data should estimate disclosure risk at each stage of the SDC process. It allows to track changes and efficiency of data protection made using various SDC methods and taking all relevant data structures into account. Due to the fact, that information on the disclosure risk can contribute to re-identification of individuals, it should be, however, confidential itself and cannot be known by the user.
 
 ### Measures of disclosure risk for categorical variables
 
@@ -207,13 +205,13 @@ $$
 
 where $\sum\limits_{i:k(i)=k}^{}w_{i}$ is an estimate of $F_k$ based on the sampling design weights $w_i$, possibly calibrated (Deville and Särndal, 1992).
 
-#### When is it possible to apply the individual risk estimation
+*When is it possible to apply the individual risk estimation*
 
 The procedure relies on the assumption that the available data are a sample from a larger population. *If the sampling weights are not available, or if data represent the whole population, the strategy used to estimate the individual risk is not meaningful*.
 
 In the μ‑ARGUS manual (de Wolf *et al.*, 2014) a fully detailed description of the approach is reported. This brief note is based on Polettini and Seri (2004).
 
-#### Assessing the risk for the whole file
+*Assessing the risk for the whole file*
 
 The individual risk provides a measure of risk *at the individual level*. A *global* measure of disclosure risk for the whole file can be expressed in terms of the expected number of re-identifications in the file. The *expected number of re*-*identifications* is a measure of disclosure that depends on the number of records. For this reason, μ‑ARGUS evaluates also the *re‑identification rate* that is independent of $n$:
 
@@ -225,7 +223,7 @@ $\xi$ provides a measure of *global risk, i.e.* a measure of disclosure risk for
 
 The *percentage of expected re-identifications*, i.e. the value $\psi=100\cdot\xi\%$ provides an equivalent measure of global risk.
 
-#### Application of local suppression within the individual risk methodology
+*Application of local suppression within the individual risk methodology*
 
 After the risk has been estimated, protection takes place. One option in protection is the application of *local suppression* (see Section 3.4.3.4).
 
@@ -235,19 +233,19 @@ In order to select the risk threshold, that represents a level of *acceptable ri
 
 In order to reduce the number of local suppressions, the procedure of releasing a safe file considers preliminary steps of protection using techniques such as *global recoding* (see Section 3.4.3.2). Recoding of selected variables will indeed lower the individual risk and therefore the re-identification rate of the file.
 
-####Threshold setting using the re-identification rate
+*Threshold setting using the re-identification rate*
 
 Consider the re-identification rate $\xi$: a key $k$ contributes to $\xi$ an amount $r_kf_k$ of expected re‑identifications. Since units belonging to the same key $k$ have the same individual risk, keys can be arranged in increasing order of risk $r_k$. Let the subscript ($k$) denotes the $k$-th element in this ordering. A threshold $r^*$ on the individual risk can be set. Consequently, unsafe cells are those for which $r_{k} \geq r^*$ that can be indexed by $(k) = k^{*} + 1,\ldots,K$. The key $k^{*}$ is in a one-to-one correspondence to $r^{*}$. This allows setting an upper bound $\xi^{*}$ on the re‑identification rate of the released file (after data protection) substituting $r_kf_k$ with $r^{*}f_{(k)}$ for each ($k$). For the mathematical details see Polettini and Seri (2004) and the Argus manual (de Wolf *et al.*, 2014).
 
 The approach pursued so far can be reversed. Therefore, selecting a *threshold* $\tau$ *on the re-identification rate* $\xi$ determines a key index $k^{*}$ which corresponds to a value for $r^{*}$. Using $r^{*}$ as a threshold for the individual risk keeps the re‑identification rate $\xi$ of the released file below $\tau$. The search of such a $k^{*}$ is performed by a simple iterative algorithm.
 
-#### Releasing hierarchical files
+*Releasing hierarchical files*
 
 A relevant characteristic of social microdata is its inherent hierarchical structure, which allows us to recognise groups of individuals in the file, the most typical case being the *household*. When defining the re-identification risk, it is important to take into account this dependence among units: indeed re-identification of an individual in the group may affect the probability of disclosure of all its members. So far, implementation of a hierarchical risk has been performed only with reference to households, i.e. a *household risk*.
 
 Allowing for dependence in estimating the risk enables us to attain a higher level of safety than when merely considering the case of independence.
 
-#### The household risk
+*The household risk*
 
 The household risk makes use of the same framework defined for the individual risk. In particular, the concept of re-identification holds with the additional assumption that *the intruder attempts a confidentiality breach by re-identification of individuals in households*.
 
@@ -277,7 +275,7 @@ $$
 
 *Individuals* are finally set to unsafe whenever $r_{i} \geq \delta_{g(i)}$; local suppression is then applied to those records, if requested. Suppression of these records ensures that after protection the household risk is below the threshold $\delta_{g}$.
 
-#### Choice of identifying variables in hierarchical files
+*Choice of identifying variables in hierarchical files*
 
 For household data it is important to include in the identifying variables that are used to estimate the household risks also the available information on the household, such as the number of components or the household type.
 
