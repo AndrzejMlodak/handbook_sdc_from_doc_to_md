@@ -18,13 +18,15 @@ Intuitively, a unit is at risk if we are able to single it out from the rest. Th
 
 When the identifying variables are categorical (as it is usually the case in social surveys) the risk is cast in terms of the cells of the contingency table built by cross-tabulating the identifying variables: the keys. Consequently all the records in the same cell have the same value of the risk.
 
-Several definitions of risk have been proposed in the literature. here we focus mainly on those for which tools are available to compute/estimate them easily. The classification of risk depends largely on the assumed criterion. We will present types of risk based on data which the intruder has access to (internal risk, external risk) or the data structure (global, individual or hierarchical risk). 
+*A classification of risk measures*
+
+Several definitions of risk have been proposed in the literature. Here we focus mainly on those for which tools are available to compute/estimate them easily. The classification of risk depends largely on the assumed criterion. We will present types of risk based on data which the intruder has access to (internal risk, external risk) or the data structure (global, individual or hierarchical risk). 
 
 We can broadly classify disclosure risk measures also into three types: risk measures based on keys in the sample, those based on keys in the population and that make use of statistical models or heuristics to estimate the quantities of interest and those based on the theory of record linkage. Whereas the first two classes in this classification are devoted to risk assessment for categorical identifying variables the third one may be used for categorical and continuous variables. For the first class of risk in this typology measures a unit is at risk if its combination of scores on the identifying variables is below a given threshold. The threshold rule used within the software package μ‑ARGUS, as presented in Section 3.6.1, is an example of this class of risk measures. For the second type of approach we are concerned with the risk of a unit as determined by its combination of scores on the identifying variables within the population or its probability of re-identification. The idea then is that a unit is at risk if such quantity is above a given threshold. Because the frequency in the population is generally unknown, it may be estimated through a modelling process. Examples of this reasoning are the individual risk of disclosure based on the Negative Binomial distribution developed by Benedetti and Franconi (1998) and Franconi and Polettini (2004), which is outlined in Section 3.5.5, and the one based on the Poisson distribution and log-linear models developed by Skinner and Holmes (1998) and Elamir and Skinner (2004) which is described in Section 3.5.6 along with current research on other probabilistic methods. Another approach based on keys in the population is the Special Uniques Detection (SUDA) Algorithm developed by Elliot et al. (2002) that uses a heuristic method to estimate the risk; this is outlined in Section 3.5.7.
 
-When identifying variables are continuous we cannot exploit the concept of rareness of the keys and we transform such concept into rareness in the neighbourhood of the record. A way to measure rareness in the neighbourhood is through record linkage techniques. This third class of disclosure risk is covered in Section 3.5.8.
+*Risk based on record linkage*
 
-Section 3.5.3 provides an introduction to disclosure risk scenarios. Section 3.5.4 introduces concepts and notation used throughout this chapter whereas Section 3.5.4 discusses the most important classifications of disclosure risk types based on various criterions.  
+When identifying variables are continuous we cannot exploit the concept of rareness of the keys and we transform such concept into rareness in the neighbourhood of the record. A way to measure rareness in the neighbourhood is through record linkage techniques. This third class of disclosure risk is covered in Section 3.5.8. Section 3.5.3 provides an introduction to disclosure risk scenarios. Section 3.5.4 introduces concepts and notation used throughout this chapter whereas Section 3.5.5 discusses the most important classifications of disclosure risk types based on various criterions.  
 
 . Sections to 3.3.8 describe different approaches to microdata risk assessment as specified above. However, as microdata risk assessment is a novelty in statistical research there isn't yet agreement on what method is the best, or at least best under given circumstances. In the following sections we comment on various approaches to risk measures and try to give advice on situations where they could or could not be applied. In any case, it has been recognised that research should be undertaken to evaluate these different approaches to microdata risk assessment, see for example Shlomo and Barton (2006).
 
@@ -50,7 +52,7 @@ In any case the definition of the scenario is essential as it defines the hypoth
 
 For microdata, disclosure risk measures quantify the risk of re-identification. Individual per record disclosure risk measures are useful for identifying high-risk records and targeting the SDC methods. These individual risk measures can be aggregated to obtain global file level disclosure risk measures. These global risk measures are particularly useful to NSIs for their decision making process on whether the microdata is safe to be released and allows comparisons across different files.
 
-####Microdata disclosure
+*Microdata disclosure*
 
 Disclosure in a microdata context means a correct record re-identification operation that is achieved by an intruder when comparing a target individual in a sample with an available list of units (external file) that contains individual identifiers such as name and address plus a set of identifying variables. Re-identification occurs when the unit in the released file and a unit in the external file belong to the same individual in the population. The underlying hypothesis is that the intruder will always try to match a unit in the sample $s$ to be released and a unit in the external file using the identifying variables only. In addition, it is likely that the intruder will be interested in identifying those sample units that are unique on the identifying variables. A re-identification occurs when, based on a comparison of scores on the identifying variables, a unit $i^*$ in the external file is selected as matching to a unit $i$ in the sample and this link is correct and therefore confidential information about the individual is disclosed using the direct identifiers.
 
@@ -74,7 +76,7 @@ Moreover we add the following assumptions:
 
 8.  The identifying variables agree on correct matches, that is no errors, missing values or time-changes occur in recording the identifying variables in the two microdata file.
 
-#### Notation
+*Notation*
 The following notation is introduced here and used throughout the chapter when describing different methods for estimating the disclosure risk of microdata.
 
 Suppose the key has $K$ cells and each cell $k = 1, \ldots, K$ is the cross-product of the categories of the identifying variables. In general, we will be looking at a contingency table spanned by the identifying variables in the microdata and not a single vector. The contingency table contains the sample counts and is typically very large and very sparse. Let the population size in cell $k$ of the key be $F_k$ and the sample size $f_k$. Also:
@@ -570,7 +572,92 @@ Similarly as e.g. in the case of significance and loss in testing of statistical
 • establishing arbitrarily maximum allowable level of disclosure risk and minimize the information loss in this situation - it defends, first of all, the data confidentiality and trust to data holder in terms of privacy protection,
 • establishing arbitrarily maximum allowable level of information loss and minimize the disclosure risk in this situation - it defends, first of all, the data utility  for users and data provider as a source of reliable, creadible and useful data. 
 
-In practice, the data holder (e.g. official statistics) prefers rather the first approach as the strict protection of data privacy is usually an obligation imposaed by valid law regulations. So, assurance of the safety of confidential information is very important.     
+In practice, the data holder (e.g. official statistics) prefers rather the first approach as the strict protection of data privacy is usually an obligation imposed by valid law regulations. So, assurance of the safety of confidential information is very important.
+
+
+### Example
+  
+  The manner of assessing disclosure risk and information loss owing to the application of SDC methods was demonstrated using data from a case study published on the website of International Household Survey Network (IHSN)[^1]: Statistical Disclosure Control for Microdata: A Practice Guide - Case Study Data and R Script. Use was made of part of the code from the first study of this type, in which the authors, Thijs Benschop and Matthew Welc, applied SDC measures to a set of farms using the sdcMicro package.
+  
+  The following categorical variables were selected as key variables: REGION, URBRUR (area of residence), HHSIZE (household size), OWNAGLAND (agricultural land ownership), RELIG (religion of household head). The authors of the case study applied local data suppression to these variables. 
+  
+  SDC was also applied to quantitative variables concerning 1) expenditure: TFOODEXP (total food expenditure), TALCHEXP (total alcohol expenditure), TCLTHEXP (total expenditure on clothing and footwear), THOUSEXP (total expenditure on housing), TFURNEXP (total expenditure on furnishing ), THLTHEXP (total expenditure on health), TTRANSEXP (total expenditure on transport), TCOMMEXP (total expenditure on communications), TRECEXP (total expenditure on recreation), TEDUEXP (total expenditure on education), TRESTHOTEXP (total expenditure on restaurants and hotel ), TMISCEXP (total miscellaneous expenditure); 2) income: INCTOTGROSSHH (total gross household income – annual), INCRMT (total amount of remittances received from remittance sending members), INCWAGE (wage and salaries – annual), INCFARMBSN (gross income from household farm businesses – annual), INCNFARMBSN (gross income from household non-farm businesses – annual), INCRENT (rental income – annual), INCFIN (financial income from savings, loans, tax refunds, maturity payments on insurance), INCPENSN (pension and other social assistance – annual), INCOTHER (other income – annual), and 3) land size: LANDSIZEHA (land size owned by household in ha). 1% noise was added to the variables relating to all components of expenditure and income; 5% noise was added to outliers. Values of the LANDSIZEHA variable were rounded (1 digit for plots smaller than 1 and to no digits for plots larger than 1) and grouped (values in intervals 5-19 to 13, and values in intervals 20-39 to 30, values larger than 40 to 40).
+  
+  In the case study, the PRAM method was applied to variables describing apartment equipment: ROOF (roof type), WATER (main source of water), TOILET (main toilet facility), ELECTCON (electricity), FUELCOOK (main cooking fuel), OWNMOTORCYCLE (ownership of motorcycle), CAR (ownership of car), TV (ownership of television), LIVESTOCK (number of large-sized livestock owned). The data were stratified by REGION variable making sure that variants of the transformed variables were not modified in 80% of cases.
+  
+  The set of data anonymised in the manner described above was used as the starting point for the assessment of the risk of disclosure and information loss. Tables @tbl-example-individual-risk and @tbl-example-global-risk shows descriptive statistics for the risk of disclosure in the case of key variables before and after applying local suppression. While the risk was significantly reduced, one must bear in mind that the risk of disclosure was already relatively low in the original dataset. The maximum value of individual risk dropped from 5.5% in the original dataset to 0.3% after applying local suppression. The global risk in the original set was on average equal to 0.05%, which means that the expected number of disclosed units was 0.99; after applying local suppression, the global risk dropped to less than 0.02, which means that the expected number of disclosed units was 0.35.
+  
+  As regards the assessment of disclosure risk for quantitative variables, an interval of [0.0%, 83.5%] was chosen, where the upper limit represents the worst case scenario in which the intruder is sure that each nearest neighbour is in fact the correct linkage.
+  
+  Several of the measures mentioned above have been developed to assess the loss of information. Based on distances between values of variables that were to be anonymised in the original set and the their values in the anonymised set, $\lambda$ measures were calculated. Table @tbl-example-information-loss shows the general value of $\lambda$ and its values for individual variables ($\lambda_k$). The overall loss  of information for the anonymised variables is 14.3%. The greatest loss is observed for quantitative variables to which noise was added; in the case of INCTOTGROSSHH, the loss of information measured by $\lambda$ reaches 83.4%. The loss of information was much lower in the case of key variables subjected to local suppression and those modified with the PRAM method: the maximum loss was 9.7% and 9.4%, respectively.
+  
+  Overall information loss was determined using two measures described above: $IL1$ and $\lambda$. $IL1$ was equal to 79.4, which indicates relatively large standard deviations of anonymised values of quantitative variables from standard deviations of the original variables. The value of the second measure, which is based on correlation coefficients, is 0.6%, which indicates a slight loss of information regarding correlations between the quantitative variables. Nevertheless, it should be stressed that as a result of to numerous cases of non-response in the quantitative variables, the value of $\lambda$ was calculated on the basis of only 111 observations, i.e. less than 6% of all units.
+  
+  The above assessment was conducted using the R sdcMicro package. Because some of the information loss measures described above are not implemented in this package, they were not used in the assessment.
+  
+  : Descriptive statistics of individual risk measures for quantitative variables {#tbl-example-individual-risk}
+  
+  | **Statistic**                  | **Original values**    | **Values after anonymisation** |
+  | :----------------------------- | ---------------------: | -----------------------------: |
+  | Min                            | 0.0007                 | 0.0007                         |
+  | Q1                             | 0.0021                 | 0.0021                         |
+  | Me                             | 0.0067                 | 0.0059                         |
+  | Q3                             | 0.0213                 | 0.0161                         |
+  | Max                            | 5.5434                 | 0.3225                         |
+  | Mean                           | 0.0502                 | 0.0176                         |
+
+
+  : Global risk measures for quantitative variables {#tbl-example-global-risk}
+  
+  | **Statistic**                  | **Original values**    | **Values after anonymisation** |
+  | :----------------------------- | ---------------------: | -----------------------------: |            
+  | Risk %                         | 0.0502                 | 0.0176                         |
+  | Expected number of disclosures | 0.9895                 | 0.3476                         |
+  
+  
+  : Loss of information due to anonymisation, overall and for individual variables {#tbl-example-information-loss}
+  
+  | **Variable**  |$\lambda$ (%)|
+  | :-----------  | --------:   |
+  | **OVERALL**   | **14.3**    |
+  | URBRUR        | 0.5         |
+  | REGION        | 0.2         |
+  | OWNAGLAND     | 2.5         |
+  | RELIG         | 1.1         |
+  | LANDSIZEHA    | 9.7         |
+  | TANHHEXP      | 50.7        |
+  | TFOODEXP      | 38.3        |
+  | TALCHEXP      | 12.6        |
+  | TCLTHEXP      | 8.4         |
+  | THOUSEXP      | 14.6        |
+  | TFURNEXP      | 6.0         |
+  | THLTHEXP      | 12.3        |
+  | TTRANSEXP     | 18.5        |
+  | TCOMMEXP      | 9.2         |
+  | TRECEXP       | 4.5         |
+  | TEDUEXP       | 41.4        |
+  | TRESTHOTEXP   | 16.6        |
+  | TMISCEXP      | 6.4         |
+  | INCTOTGROSSHH | 73.6        |
+  | INCRMT        | 32.1        |
+  | INCWAGE       | 71.0        |
+  | INCFARMBSN    | 15.1        |
+  | INCNFARMBSN   | 24.0        |
+  | INCRENT       | 10.4        |
+  | INCFIN        | 1.3         |
+  | INCPENSN      | 17.1        |
+  | INCOTHER      | 17.7        |
+  | ROOF          | 6.0         |
+  | TOILET        | 7.6         |
+  | WATER         | 9.4         |
+  | ELECTCON      | 1.7         |
+  | FUELCOOK      | 4.3         |
+  | OWNMOTORCYCLE | 3.3         |
+  | CAR           | 1.5         |
+  | TV            | 7.3         |
+  | LIVESTOCK     | 1.3         |
+
+[^1]: http://www.ihsn.org/software/disclosure-control-toolbox
 
 ### References
 
