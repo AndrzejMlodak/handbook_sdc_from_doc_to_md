@@ -16,11 +16,11 @@ In order to undertake a risk assessment of microdata, NSIs might rely on *ad-hoc
 
 Intuitively, a unit is at risk if we are able to single it out from the rest. The idea at the base of the definition of risk is a way to measure rareness of a unit either in the sample or in the population.
 
-When the identifying variables are categorical (as it is usually the case in social surveys) the risk is cast in terms of the cells of the contingency table built by cross-tabulating the identifying variables: the keys. Consequently all the records in the same cell have the same value of the risk.
+When the identifying variables are categorical (as it is usually the case in social surveys) the risk is cast in terms of the cells of the contingency table built by cross-tabulating the identifying variables being the keys. Consequently all the records in the same cell have the same value of the risk.
 
 Section 3.5.3 provides an introduction to disclosure risk scenarios. Section 3.5.4 introduces concepts and notation used throughout this chapter whereas Section 3.5.5 discusses the most important classifications of disclosure risk types based on various criterions. Sections from 3.5.6 to 3.5.8 describe different approaches to microdata risk assessment as specified above. However, as microdata risk assessment is a novelty in statistical research there isn't yet agreement on what method is the best, or at least best under given circumstances. In the following sections we comment on various approaches to risk measures and try to give advice on situations where they could or could not be applied. In any case, it has been recognised that research should be undertaken to evaluate these different approaches to microdata risk assessment, see for example Shlomo and Barton (2006).
 
-The focus of these methods and this section of the handbook is for microdata samples from social surveys. For microdata samples from censuses or registers the disclosure risk is known. Business survey microdata are not typically released due to their disclosive nature (skewed distributions and very high sampling fractions).
+The focus of these methods and this section of the handbook is for microdata samples from social surveys. For microdata samples from censuses or registers the disclosure risk is known. Business survey microdata are not typically released due to their disclosive nature (skewed distributions or very small number of units sampled from some areas).
 
 In section 1.1 we make some suggestions on practical implementation and in section 3.8 we give examples of real data sets and ways in which risk assessment could be carried out.
 
