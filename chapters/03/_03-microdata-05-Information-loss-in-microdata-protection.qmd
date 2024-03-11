@@ -64,7 +64,7 @@ Moreover we add the following assumptions:
 
 7.  The intruder tries to match all the records in the sample with a record in the external file;
 
-8.  The identifying variables agree on correct matches, that is no errors, missing values or time-changes occur in recording the identifying variables in the two microdata file.
+8.  The identifying variables are consistent in terms of matching, that is no errors, missing values or time-changes occur in recording the identifying variables in the two microdata files.
 
 *Notation*
 The following notation is introduced here and used throughout the chapter when describing different methods for estimating the disclosure risk of microdata.
