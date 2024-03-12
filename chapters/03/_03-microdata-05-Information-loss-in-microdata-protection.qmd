@@ -69,20 +69,20 @@ Moreover we add the following assumptions:
 *Notation*
 The following notation is introduced here and used throughout the chapter when describing different methods for estimating the disclosure risk of microdata.
 
-Suppose the key has $K$ cells and each cell $k = 1, \ldots, K$ is the cross-product of the categories of the identifying variables. In general, we will be looking at a contingency table spanned by the identifying variables in the microdata and not a single vector. The contingency table contains the sample counts and is typically very large and very sparse. Let the population size in cell $k$ of the key be $F_k$ and the sample size $f_k$. Also:
+In general, we will be looking at a contingency table spanned by the identifying variables in the microdata and not a single vector. The contingency table contains the sample counts and is typically very large and very sparse. Such table has then $K$ cells and each cell $k=1,\ldots,K$ is the cross-product of the categories of the identifying variables. Let the population size in cell $k$ of the table be $F_k$ and the sample size $f_k$. Also:
 
 $$
-\sum_{k = 1}^{K}F_{k} = N,\quad \sum_{k = 1}^{K}f_{k} = n \quad .
+\sum_{k=1}^{K}F_{k}=N,\quad\sum_{k=1}^{K}f_{k}=n \quad .
 $$
 
-Formally the sample and population sizes in the models introduced in sections 3.3.5 and 3.3.6 are random and their expectations are denoted by n and N respectively. In practice, the sample and population size are usually replaced by their natural estimators; the actual sample and population sizes, assumed to be known.
+Formally the sample and population sizes in the models introduced in sections 3.5.4 and 3.5.5 are random and their expectations are denoted by $n$ and $N$ respectively. In practice, the sample and population size are usually replaced by their natural estimators; the actual sample and population sizes, assumed to be known.
 
-Observing the values of the key on individual $i \in s$ will classify such individual into one cell. We denote by $k(i)$ the index of the cell into which individual $i \in s$ is classified based on the values of the key.
+Observing the values in the table on individual $i \in s$ will classify such individual into one cell. We denote by $k(i)$ the index of the cell into which individual $i\in s$ is classified based on the values of this object.
 
 According to the concept of re-identification disclosure given above, we define the (base) individual risk of disclosure of unit $i$ in the sample as its probability of re-identification under the worst case scenario. Therefore the risk $r_i$ that we get is certainly not smaller than the actual risk, the individual risk is a conservative estimate of the actual risk:
 
 $$
-r_{i}=\operatorname{Pr}\left( i \text{correctly linked with} i^* \mid s , P \text{, worst case scenario }\right) \qquad\text{(3.2.3.1)}
+r_{i}=\operatorname{Pr}\left( i \text{correctly linked with} i^* \mid s , P \text{, worst case scenario }\right) \qquad\text{(3.5.4.1)}
 $$
 
 
@@ -92,13 +92,13 @@ $$
 \tau_{1} = \sum\limits_{k}^{}\frac{1}{F_{k}}
 $$
 
-An alternative global risk measure can be calculated by aggregating the individual disclosure risk measures over the sample uniques of the cross-classified identifying variables. Since the uniques in the population $F_k = 1$, are the dominant factor in the disclosure risk measure, we focus our attention on sample uniques $f_k = 1$:
+An alternative global risk measure can be calculated by aggregating the individual disclosure risk measures over the sample uniques of the cross-classified identifying variables. Since the uniques in the population $F_k=1$, are the dominant factor in the disclosure risk measure, we focus our attention on sample uniques $f_k=1$:
 
 $$
-\tau_{2} = \sum\limits_{k}^{}{I(f_{k} = 1)\frac{1}{F_{k}}}
+\tau_{2} = \sum\limits_{k}^{}{I(f_{k}=1)\frac{1}{F_{k}}}
 $$
 
-where $I$ represents an indicator function obtaining the value 1 if $f_k = 1$ or 0 if not.
+where $I$ represents an indicator function obtaining the value 1 if $f_k=1$ or 0 if not.
 
 Both of these global risk measures can also be presented as rates by dividing by $n$, the sample size or the number of uniques.
 
@@ -112,7 +112,7 @@ Several definitions of risk and several criteria to classify the risk have been 
 
 Due to the range of data that can be used to identify the individual one can distinguish two types of disclosure risk for a dataset obtained once the SDC process has been applied (cf. Młodak, Pietrzak and Józefowski (2022)):
 
-    • internal risk -- when there is a threat of identifying  units only using modified data (it is worth noting that the measures of internal risk can obviously be used to assess the risk of disclosure in the original data),
+    • internal risk -- when there is a threat of identifying units only using modified data (it is worth noting that the measures of internal risk can obviously be used to assess the risk of disclosure in the original data),
 
     • external risk -- when there is a threat of identifying units by attempting to link data after SDC with information from other sources possibly available to the user.
 
@@ -121,8 +121,6 @@ Internal risk results from the existence of unique combinations of values (exact
 Internal risk refers to the risk of a user/intruder identifying a given unit only by using information included in the file that has been made available by the data provider (e.g. statistical office). In this case, it is assumed that the user can only rely on information that can be obtained from the data set made available to to him/her. In contrast, external risk refers to the situation when the user can access alternative data sources and use them in an attempt to identify units by linking relevant data from different sources. As can be seen, these two kinds of risks are rather different.
 
 Internal risk seems to be easier to compute than the external risk. Internal threats for confidentiality can be modelled by violation of the aforementioned rules based on frequency of combinations of values of categorical variables and of observations falling into an re-identification precision interval around a given value of continuous variable. However, the estimation of external risk requires a knowledge about possible alternative data sources available for the user. This knowledge is hard to obtain, but we can (with large probability) suppose which possibilities in this respect he/she can have. For instance, if the user is employed in the labour office, one can suppose the he/she has an access to the basis of unemployed persons, which can be linked by him/her with the database from the Labour Force Survey obtained from the official statistics or similar data holder). The internal and external risk can be combined to obtain a total disclosure risk.   
-
-A strict evaluation of information loss must be based on the data uses to be supported by the protected data. The greater the differences between the results obtained on original and protected data for those uses, the higher the loss of information. However, very often microdata protection cannot be performed in a data use specific manner, for the following reasons:
 
 Another classification of disclosure risk is connected with the reference object. That is, the following types of risk from this point of view are distinguished (cf. Templ (2017)):
 
