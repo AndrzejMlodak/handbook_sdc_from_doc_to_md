@@ -295,7 +295,14 @@ In each local neighbourhood of cell *k* a smoothing polynomial regression model 
 
 #### SUDA
 
-The Special Uniques Detection Algorithm (SUDA) (Elliot *et.al.*, 2005) is a software system (windows application available as freeware under restricted licence) that provides disclosure risk broken down by record, variable, variable value and by interactions of those. It is based on the concept of a "special unique". A special unique is a record that is a sample unique on a set of variables and that is also unique on a subset of those variables. Empirical work has shown that special uniques are more likely to be population unique than random uniques. Special uniques can be classified according to the size and number of the smallest subset of key variables that defines the record as unique, known as minimal sample uniques (MSU). In the algorithm, all MSUs are found for each record on all possible subsets of the key variables where the maximum size of the subsets *m* is specified by the user. ![](Images/media/image20.png){width="0.2in" height="0.2in"}
+The Special Uniques Detection Algorithm (SUDA) (Elliot *et.al.*, 2005) is a software system (windows application available as freeware under restricted licence) that provides disclosure risk broken down by record, variable, variable value and by interactions of those. It is based on the concept of a "special unique". A special unique is a record that is a sample unique on a set of variables and that is also unique on a subset of those variables. Empirical work has shown that special uniques are more likely to be population unique than random uniques. Special uniques can be classified according to the size and number of the smallest subset of key variables that defines the record as unique, known as minimal sample uniques (MSU). In the algorithm, all MSUs are found for each record on all possible subsets of the key variables where the maximum size of the subsets *m* is specified by the user. ![](Images/media/image20.png){width="0.2in" height="0.2in"}. For each MSU of size $k$ contained in a given observation the following score is computed (cf. Templ (2017)):
+$$
+s_k=\begin{cases}
+\frac{1}{m!}\prod_{i=k}^q{(m-i)}&\textmd{if}\quad k\le q,\\
+0&\textmd{if}\quad k>q,
+\end{cases}
+$$
+where $q$ is the total number of key categorical variables in the data set and $q$ -- arbitrarily defined maximum size of MSU. Thus, the smaller $k$, the larger $s_k$ and higher the risk. The SUDA score for the observation is the product of scores for all MSUs contained in it. The final SUDA score is obtained by normalizing $s_k$ by $q!$.   
 
 SUDA grades and orders records within a microdata file according to the level of risk. The method assigns a per record matching probability to a sample unique based on the number and size of minimal uniques. The DIS Measure (Elliot, 2000) is the conditional probability of a correct match given a unique match:
 
