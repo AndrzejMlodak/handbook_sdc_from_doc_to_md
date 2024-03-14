@@ -534,7 +534,7 @@ where $\mathfrak{r}(x_{ij}}^',x_{ij})$ is the absolute difference in categories 
 Much more complicated situation occurs for continuous variables. Młodak (2020) proposed several options is this respect, e.g. normalized absolute value or normalized square of difference between ${x_{ij}}^'$ and $x_{ij}$, i.e. 
 $$d({x_{ij}}^',x_{ij})=|{x_{ij}}^'-x_{ij}|/\max_{k=1,2,\ldots,n}⁡|{x_{kj}}^'-x_{kj}|,$$ (3.5.9)
 or
-$$d({x_{ij}}^',x_{ij})=({x_{ij}}^'-x_{ij})^2/\max_(k=1,2,\lots,n)⁡({x_{kj}}^'-x_{kj})^2,$$ (3.5.10)
+$$d({x_{ij}}^',x_{ij})=({x_{ij}}^'-x_{ij})^2/\max_{k=1,2,\lots,n}⁡({x_{kj}}^'-x_{kj})^2,$$ (3.5.10)
 $i=1,2,\ldots,n$, $j=1,2,\ldots,m_c$, where $n$ is the number of records and $m_c$ - the number of continuous variables.
 
 Measures (3.5.8) and (3.5.9) also have another significant weakness. The measure of information loss should be an increasing function due to individual partial information losses. This means that, for example, if for some $i\in\{1,2,\ldots,n\}$ the value $|x_{ij}^'-x_{ij}|$ will increase and all $|x_{hj}^'-x_{hj}|$ for $h\ne i$ remain the same, the value of the distance should increase. Meanwhile, in the case of formulas (3.5.9) and (3.5.10), this will not be the case. If, for the same, the indicated absolute difference (or the square of the difference, respectively) between the original value and the value after SDC reaches a maximum, then the partial loss of information for $i$ will remain unchanged - it will be 1, and for the others it will turn out to be smaller. As a result, we get a smaller metric value, while the information loss actually increased.
