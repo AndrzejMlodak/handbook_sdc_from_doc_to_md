@@ -82,7 +82,7 @@ Observing the values in the table on individual $i \in s$ will classify such ind
 According to the concept of re-identification disclosure given above, we define the (base) individual risk of disclosure of unit $i$ in the sample as its probability of re-identification under the worst case scenario. Therefore the risk $r_i$ that we get is certainly not smaller than the actual risk, the individual risk is a conservative estimate of the actual risk:
 
 $$
-r_{i}=\operatorname{Pr}\left( i\quad\text{correctly linked with}\quad i^* \mid s , P \text{, worst case scenario }\right) \qquad\text{(3.5.4.1)}
+r_{i}=\operatorname{Pr}\left( i\;\text{correctly linked with}\; i^* \mid s , P \text{, worst case scenario }\right) \qquad\text{(3.5.1)}
 $$
 
 
@@ -170,13 +170,13 @@ If a key is considered unsafe according to this rule, protection is required. Th
 If a distinction between units rare in the sample from a unit rare in the population wants to be made then an inferential step may be followed. In the initial proposal by Benedetti and Franconi (1998), further developed in Franconi and Polettini (2004) and implemented in μ‑ARGUS, the uncertainty on $F_k$ is accounted for in a Bayesian fashion by introducing the distribution of the population frequencies given the sample frequencies. The individual risk of disclosure is then measured as the (posterior) mean of $\frac{1}{F_k}$ with respect to the distribution of $F_k|f_k$:![](Images/media/image2.png){width="0.2in" height="0.2in"}
 
 $$
-r_{i} = \mathrm{E} \left( \frac{1}{F_{k}} \mid f_{k} \right) = \sum\limits_{h\geq f_{k}} \frac{1}{h} \operatorname{Pr} \left(F_{k} = h \mid f_{k} \right). \qquad\text{(3.5.1)}
+r_{i} = \mathrm{E} \left( \frac{1}{F_{k}} \mid f_{k} \right) = \sum\limits_{h\geq f_{k}} \frac{1}{h} \operatorname{Pr} \left(F_{k} = h \mid f_{k} \right). \qquad\text{(3.5.2)}
 $$
 
 where the posterior distribution of $F_k|f_k$ is negative binomial with success probability $p_k$ and number of successes $f_k$. As the risk is a function of $f_k$ and $p_k$ its estimate can be obtained by estimating $p_k$. Benedetti and Franconi (1998) propose to use
 
 $$
-{\hat{p}}_{k} = \frac{f_{k}}{\sum\limits_{i:k(i)=k}^{}w_{i}} \qquad \text{(3.5.2)}
+{\hat{p}}_{k} = \frac{f_{k}}{\sum\limits_{i:k(i)=k}^{}w_{i}} \qquad \text{(3.5.3)}
 $$ 
 
 where $\sum\limits_{i:k(i)=k}^{}w_{i}$ is an estimate of $F_k$ based on the sampling design weights $w_i$, possibly calibrated (Deville and Särndal, 1992).
