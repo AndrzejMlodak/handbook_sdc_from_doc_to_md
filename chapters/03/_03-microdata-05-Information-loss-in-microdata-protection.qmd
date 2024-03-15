@@ -170,13 +170,13 @@ If a key is considered unsafe according to this rule, protection is required. Th
 If a distinction between units rare in the sample from a unit rare in the population wants to be made then an inferential step may be followed. In the initial proposal by Benedetti and Franconi (1998), further developed in Franconi and Polettini (2004) and implemented in μ‑ARGUS, the uncertainty on $F_k$ is accounted for in a Bayesian fashion by introducing the distribution of the population frequencies given the sample frequencies. The individual risk of disclosure is then measured as the (posterior) mean of $\frac{1}{F_k}$ with respect to the distribution of $F_k|f_k$:![](Images/media/image2.png){width="0.2in" height="0.2in"}
 
 $$
-r_{i} = \mathrm{E} \left( \frac{1}{F_{k}} \mid f_{k} \right) = \sum\limits_{h\geq f_{k}} \frac{1}{h} \operatorname{Pr} \left(F_{k} = h \mid f_{k} \right). \qquad\text{(3.2.5.1)}
+r_{i} = \mathrm{E} \left( \frac{1}{F_{k}} \mid f_{k} \right) = \sum\limits_{h\geq f_{k}} \frac{1}{h} \operatorname{Pr} \left(F_{k} = h \mid f_{k} \right). \qquad\text{(3.5.1)}
 $$
 
 where the posterior distribution of $F_k|f_k$ is negative binomial with success probability $p_k$ and number of successes $f_k$. As the risk is a function of $f_k$ and $p_k$ its estimate can be obtained by estimating $p_k$. Benedetti and Franconi (1998) propose to use
 
 $$
-{\hat{p}}_{k} = \frac{f_{k}}{\sum\limits_{i:k(i)=k}^{}w_{i}} \qquad \text{(3.2.5.2)}
+{\hat{p}}_{k} = \frac{f_{k}}{\sum\limits_{i:k(i)=k}^{}w_{i}} \qquad \text{(3.5.2)}
 $$ 
 
 where $\sum\limits_{i:k(i)=k}^{}w_{i}$ is an estimate of $F_k$ based on the sampling design weights $w_i$, possibly calibrated (Deville and Särndal, 1992).
@@ -307,7 +307,7 @@ where $q$ is the total number of key categorical variables in the data set and $
 SUDA grades and orders records within a microdata file according to the level of risk. The method assigns a per record matching probability to a sample unique based on the number and size of minimal uniques. The DIS Measure (Elliot, 2000) is the conditional probability of a correct match given a unique match:
 
 $$
-p(cm \mid um) = \frac{\sum\limits_{k = 1}^{K} I\left(f_{k} = 1 \right)}{\sum\limits_{k = 1}^{K} F_{k} I \left(f_{k} = 1 \right) }
+p(cm \mid um) = \frac{\sum\limits_{k=1}^{K} I\left(f_{k}=1 \right)}{\sum\limits_{k=1}^{K} F_{k} I \left(f_{k}=1 \right) }
 $$
 
 (where $cm$ denotes correct match and $um$ -- unique match) and is estimated by a simple sample-based measure which is approximately unbiased without modelling assumptions. Elliot *et al.* (2005) describe a heuristic which combines the DIS measure with scores resulting from the algorithm (i.e., SUDA scores). This method known as DIS-SUDA produces estimates of intruder confidence in a match against a given record being correct. This is closely related to the probability that the match is correct and is heuristically linked to the estimate of
@@ -373,7 +373,7 @@ It is worth noting that the classical construction of measures of disclosure ris
 
 On the other hand, the data users (in this case to concerns mainly statisticians involved in data processing and their preparation for dissemination – as the information on the disclosure risk is usually confidential) are interested in obtaining precise, reliable and comprehensive information on the disclosure risk. Too low quality of estimation of such risk can lead to insufficient protection of sensible information and, consequently, to violation of privacy of a respondent.
 
-Taking these premises into account, Młodak, Pietrzak, and Józefowski (2022) discussed the possibility of use in this context the distance based on the idea of the Gower’s formula. Recall, that this approach takes all types of variables (according to their measurement scales) into account. In this way, the disclosure risk has been assessed in context of possible re-identification by linking relevant record from a given data set and record from a related alternative database available for the user. It is in fact the measure of external risk. A similar idea can be used also to complex assessment of internal disclosure risk using the distance-based approach, where application of the analogous concept of distance allows for joint estimation of change of the risk before and after performing SDC process. Also the probabilistic record linkage, where the conditional probability that a pair of records has an agreement pattern $\gamma$, given that it is a true match and the conditional probability that a pair of records has an agreement pattern $\gamma$ given they are true unmatched records (cf. Sayers et al. (2016)) can be computed using using a properly selected categorization of continuous variables. 
+Taking these premises into account, Młodak, Pietrzak and Józefowski (2022) discussed the possibility of use in this context the distance based on the idea of the Gower’s formula. Recall, that this approach takes all types of variables (according to their measurement scales) into account. In this way, the disclosure risk has been assessed in context of possible re-identification by linking relevant record from a given data set and record from a related alternative database available for the user. It is in fact the measure of external risk. A similar idea can be used also to complex assessment of internal disclosure risk using the distance-based approach, where application of the analogous concept of distance allows for joint estimation of change of the risk before and after performing SDC process. Also the probabilistic record linkage, where the conditional probability that a pair of records has an agreement pattern $\gamma$, given that it is a true match and the conditional probability that a pair of records has an agreement pattern $\gamma$ given they are true unmatched records (cf. Sayers et al. (2016)) can be computed using using a properly selected categorization of continuous variables. 
 
 However, as one can see, these methods can be also applied only in comparative terms. If we would like to assess the primary individual disclosure risks in the original dataset, we will have to use a combination of risks associated with categorical and continuous variables which are computed on the basis of the frequency rules (in the case of countinuous variables - using the sumber of observations falling into $(x(1-p),x(1+p))$, as it was stated before). The global risk is e.g. the arithmetic mean of individual risks. When it is also possible to use a comprehensive measure of disclosure risk, achieving a balance between minimizing these two quantities will become much easier.
 
@@ -435,7 +435,7 @@ For a nominal variable $V$ (a categorical variable taking values over an unorder
 $$dv(c,c')=\begin{cases}
 0, & \text{if $c=c'$},\\
 1, & \text{if $c\neq c'$},
-\end{cases}$$ (3.5.1)
+\end{cases}$$ (3.5.3)
 where $c$ is a category in an original record and $c^'$ is the category which has replaced *c* in the corresponding protected record.
 
 For an ordinal variable $V$ (a categorical variable taking values over a totally ordered set), let $\leq V$ be the total order operator over the range $D(V)$ of $V$. Define the distance between categories $c$ and $c^'$ as the number of categories between the minimum and the maximum of $c$ and $c^'$ divided by the cardinality of the range:
@@ -513,9 +513,9 @@ Trottini (2003) argues that, since information loss is to be traded off for disc
 
 Młodak (2020) proposed a new measure of information loss for continuous variables in terms of assesment of impact on the intensity of connections, which was slighthly improved by Młodak, Pietrzak and Józefowski (2022). It is based on on diagonal entries of inversed correlation matrices for continuous variables in the original ($R^{-1}$) and perturbed (${R^'}^{-1}$) data sets, i.e. $\rho_{jj}^{(-1)}$ and ${\rho_{jj}^'}^{(-1)}$), $j=1,2,\ldots,m_c$ (where $m_c$ is the number of continuous variables):
 
-$$\gamma=\frac{1}{\sqrt{2}}\sqrt{\sum_{j=1}^{m_c}{\left(\frac{\rho_{jj}^{(-1)}}{\sqrt{\sum_{l=1}^m{\left(\rho_{ll}^{(-1)}\right)^2}}}-\frac{\rho_{jj}^{*(-1)}}{\sqrt{\sum_{l=1}^m{\left(\rho_{ll}^{*(-1)}\right)^2}}}\right)^2}}\in [0,1].$$ (3.5.6)
+$$\gamma=\frac{1}{\sqrt{2}}\sqrt{\sum_{j=1}^{m_c}{\left(\frac{\rho_{jj}^{(-1)}}{\sqrt{\sum_{l=1}^m{\left(\rho_{ll}^{(-1)}\right)^2}}}-\frac{\rho_{jj}^{*(-1)}}{\sqrt{\sum_{l=1}^m{\left(\rho_{ll}^{*(-1)}\right)^2}}}\right)^2}}\in [0,1].$$ (3.5.5)
 
-Values of (3.5.6) are also easily interpretable - it can be understood as the expected loss of information about connections between variables. As one can easily see, the result can be expressed in $\%$. Of course, both matrices - $R$ and $R'$ - must be based on the same correlation coefficient. The most obvious choice in this respect is the Pearson's index. However, when tau-Kendall correlation matrix is used, one can also apply it to ordinal variables. The method will be not applicable if the correlation matrix is singular. The main advantage of the measure $\gamma$ is that it treats all variables as an inseparable whole and takes all connections between analysed variables, even those hard to observe, into account. $\gamma$ can be computed in the sdcMicro R package using the function *IL_correl()*. 
+Values of (3.5.5) are also easily interpretable - it can be understood as the expected loss of information about connections between variables. As one can easily see, the result can be expressed in $\%$. Of course, both matrices - $R$ and $R'$ - must be based on the same correlation coefficient. The most obvious choice in this respect is the Pearson's index. However, when tau-Kendall correlation matrix is used, one can also apply it to ordinal variables. The method will be not applicable if the correlation matrix is singular. The main advantage of the measure $\gamma$ is that it treats all variables as an inseparable whole and takes all connections between analysed variables, even those hard to observe, into account. $\gamma$ can be computed in the sdcMicro R package using the function *IL_correl()*. 
 
 ### Complex measures of information loss
 
@@ -523,41 +523,41 @@ The above presented concepts of information loss prompt the question whether it 
 $$
 d({x_{ij}}^',x_{ij})=\begin{cases}
 1&\textmd{if}\;x_{ij}}^'=x_{ij},\cr
-0&\textmd{if}\;x_{ij}}^'\ne x_{ij}. (3.5.7)
+0&\textmd{if}\;x_{ij}}^'\ne x_{ij}. (3.5.6)
 $$
 If $X_j$ is ordinal (assuming for simplification and without loss of generality that categories are numbered from 1 to $\mathfrak{r}_j$, where $\mathfrak{r}_j$ is the number of categories), then (NA is treated as a separate, lowest category)
 $$
-d({x_{ij}}^',x_{ij})=\frac{\mathfrak{r}(x_{ij}}^',x_{ij})}{\mathfrak{r}_j-1}, (3.5.8)
+d({x_{ij}}^',x_{ij})=\frac{\mathfrak{r}(x_{ij}}^',x_{ij})}{\mathfrak{r}_j-1}, (3.5.7)
 $$
-where $\mathfrak{r}(x_{ij}}^',x_{ij})$ is the absolute difference in categories between $x_{ij}}^'$ and $x_{ij}$. These partial distances take always values from [0,1]. There are, however, some problems with using them, especially if recoding is applied. The number of categories of a recoded variable in the original set and in the set after SDC will be different. Therefore, in the first place, it should be ensured that the numbers of the categories left unchanged are identical in both variants. For example, if before recoding the variable $X_j$ had $\mathfrak{r}_j$=8 categories marked as 1,2,3,4,5,6,7,8 and as a result of recoding categories 2 and 3 and 6 and 7 were combined, then the new categories should have respectively numbers 1,2,4,5,6,8. Then the option (3.5.8) for categorical variables applies in this case as well.
+where $\mathfrak{r}(x_{ij}}^',x_{ij})$ is the absolute difference in categories between $x_{ij}}^'$ and $x_{ij}$. These partial distances take always values from [0,1]. There are, however, some problems with using them, especially if recoding is applied. The number of categories of a recoded variable in the original set and in the set after SDC will be different. Therefore, in the first place, it should be ensured that the numbers of the categories left unchanged are identical in both variants. For example, if before recoding the variable $X_j$ had $\mathfrak{r}_j$=8 categories marked as 1,2,3,4,5,6,7,8 and as a result of recoding categories 2 and 3 and 6 and 7 were combined, then the new categories should have respectively numbers 1,2,4,5,6,8. Then the option (3.5.7) for categorical variables applies in this case as well.
 
 Much more complicated situation occurs for continuous variables. Młodak (2020) proposed several options is this respect, e.g. normalized absolute value or normalized square of difference between ${x_{ij}}^'$ and $x_{ij}$, i.e. 
-$$d({x_{ij}}^',x_{ij})=|{x_{ij}}^'-x_{ij}|/\max_{k=1,2,\ldots,n}⁡|{x_{kj}}^'-x_{kj}|,$$ (3.5.9)
+$$d({x_{ij}}^',x_{ij})=|{x_{ij}}^'-x_{ij}|/\max_{k=1,2,\ldots,n}⁡|{x_{kj}}^'-x_{kj}|,$$ (3.5.8)
 or
-$$d({x_{ij}}^',x_{ij})=({x_{ij}}^'-x_{ij})^2/\max_{k=1,2,\lots,n}⁡({x_{kj}}^'-x_{kj})^2,$$ (3.5.10)
+$$d({x_{ij}}^',x_{ij})=({x_{ij}}^'-x_{ij})^2/\max_{k=1,2,\lots,n}⁡({x_{kj}}^'-x_{kj})^2,$$ (3.5.9)
 $i=1,2,\ldots,n$, $j=1,2,\ldots,m_c$, where $n$ is the number of records and $m_c$ - the number of continuous variables.
 
-Measures (3.5.8) and (3.5.9) also have another significant weakness. The measure of information loss should be an increasing function due to individual partial information losses. This means that, for example, if for some $i\in\{1,2,\ldots,n\}$ the value $|x_{ij}^'-x_{ij}|$ will increase and all $|x_{hj}^'-x_{hj}|$ for $h\ne i$ remain the same, the value of the distance should increase. Meanwhile, in the case of formulas (3.5.9) and (3.5.10), this will not be the case. If, for the same, the indicated absolute difference (or the square of the difference, respectively) between the original value and the value after SDC reaches a maximum, then the partial loss of information for $i$ will remain unchanged - it will be 1, and for the others it will turn out to be smaller. As a result, we get a smaller metric value, while the information loss actually increased.
+Measures (3.5.8) and (3.5.9) also have another significant weakness. The measure of information loss should be an increasing function due to individual partial information losses. This means that, for example, if for some $i\in\{1,2,\ldots,n\}$ the value $|x_{ij}^'-x_{ij}|$ will increase and all $|x_{hj}^'-x_{hj}|$ for $h\ne i$ remain the same, the value of the distance should increase. Meanwhile, in the case of formulas (3.5.8) and (3.5.9), this will not be the case. If, for the same, the indicated absolute difference (or the square of the difference, respectively) between the original value and the value after SDC reaches a maximum, then the partial loss of information for $i$ will remain unchanged - it will be 1, and for the others it will turn out to be smaller. As a result, we get a smaller metric value, while the information loss actually increased.
 
 Taking the aforementioned observations into account Młodak (2020) proposed in the discussed case the distance of the form: 
 $$
-d({x_{ij}}^',x_{ij})=\frac{2}{\pi}\arctan|{x_{ij}}^'-x_{ij}|.  (3.5.11)
+d({x_{ij}}^',x_{ij})=\frac{2}{\pi}\arctan|{x_{ij}}^'-x_{ij}|.  (3.5.10)
 $$
 The arcus tangens (arctan) function was used to ensure that the distance between original and perturbed values takes values from $[0,1]$. To achieve this, an ascending function bounded on both sides (both from the top and from the bottom) should be applied. The arctan seems to be a good solution and is also easy to compute. Of course -- like any function of this type -- it is not perfect: for larger absolute differences between original and perturbed values it tends to be close to $\frac{\pi}{2}$ (and, in consequence, $d(x_{ij}^',x_{ij})$ to be close to 1). On the other hand, owing to this property it exhibits more clearly all information losses due to perturbation.
 
 The complex measure of distribution disturbance is given by (cf. Młodak, Pietrzak and Józefowski (2022)):
 $$
-\lambda=\sum_{j=1}^m{\sum_{i=1}^n{\frac{d(x_{ij}^',x_{ij})}{mn}}}\in [0,1],   (3.5.12)
+\lambda=\sum_{j=1}^m{\sum_{i=1}^n{\frac{d(x_{ij}^',x_{ij})}{mn}}}\in [0,1],   (3.5.11)
 $$
-where $d(\cdot,\cdot)\in [0,1]$ is measure of distance according to the formulas (3.5.7), (3.5.8) or (3.5.11) according to the measurement scale of a given value.
+where $d(\cdot,\cdot)\in [0,1]$ is measure of distance according to the formulas (3.5.6), (3.5.7) or (3.5.10) according to the measurement scale of a given value.
 
 Authors of the aforementioned paper indicated also than one can measure the contribution of particular variables $X_j$ to total information loss as follows  
 $$
-\lambda_j=\sum_{i=1}^n{\frac{d(x_{ij}^',x_{ij})}{n}}\in [0,1],    (3.5.13)
+\lambda_j=\sum_{i=1}^n{\frac{d(x_{ij}^',x_{ij})}{n}}\in [0,1],    (3.5.12)
 $$
 $j=1,2,\ldots,m$.
 
-An additional problem occurs if non-perturbative SDC tools are used. In this case the original values are either suppressed or remained unchanged. How to proceed in this case during computation of the measures (3.5.10) and (3.5.11) also depends on the measurement scale of the variables. The used If $X_j$ is nominal, then if $x_{ij}^'$ is hidden then one should assume $d(x_{ij}^',x_{ij})=1$; if $X_j$ is ordinal, then we assign $x_{ij}^':=1$ if $x_{ij}$ is closer to $\mathfrak{r}_j$ or $x_{ij}^':=\mathfrak{r}_j$ if $X_j$ is closer to 1; if $X_j$ is continuous, then
+An additional problem occurs if non-perturbative SDC tools are used. In this case the original values are either suppressed or remained unchanged. How to proceed in this case during computation of the measures (3.5.9) and (3.5.10) also depends on the measurement scale of the variables. The used If $X_j$ is nominal, then if $x_{ij}^'$ is hidden then one should assume $d(x_{ij}^',x_{ij})=1$; if $X_j$ is ordinal, then we assign $x_{ij}^':=1$ if $x_{ij}$ is closer to $\mathfrak{r}_j$ or $x_{ij}^':=\mathfrak{r}_j$ if $X_j$ is closer to 1; if $X_j$ is continuous, then
 $$
 x_{ij}^':=\begin{cases}
 \max\limits_{h=1,2,\ldots,n}{x_{hj}}&\textmd{if}\quad x_{ij}\le\med_{h=1,2,\ldots,n}{x_{hj}},\\
@@ -565,7 +565,7 @@ x_{ij}^':=\begin{cases}
 \end{cases}
 $$
 
-The measures (3.5.12) and (3.5.13) can be expressed as a percentages and show total information loss and contribution of particular variables to it, respectively. the-- the greater the value of $\lambda$/$\lambda_j$, the bigger the loss/contribution. In this way users obtain clear and easily understandable information about expected information loss owing to the application of SDC. These measures were implemented to the sdcMicro R package and are computed by the function *IL_variables*.
+The measures (3.5.11) and (3.5.12) can be expressed as a percentages and show total information loss and contribution of particular variables to it, respectively. the-- the greater the value of $\lambda$/$\lambda_j$, the bigger the loss/contribution. In this way users obtain clear and easily understandable information about expected information loss owing to the application of SDC. These measures were implemented to the sdcMicro R package and are computed by the function *IL_variables*.
 
 ### Practical realization of trade-off between safety and utility of microdata
 
