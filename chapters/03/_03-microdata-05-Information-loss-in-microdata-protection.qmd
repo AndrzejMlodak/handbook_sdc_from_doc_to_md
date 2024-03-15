@@ -532,19 +532,19 @@ Values of (3.5.8) are also easily interpretable - it can be understood as the ex
 
 The above presented concepts of information loss prompt the question whether it is possible to construct complex measure of information loss taking variables of all measurement scales into account. The relevant proposal was formulated by Młodak (2020) and applied by Młodak, Pietrzak and Józefowski (2022) to the case of microdata from the Polish survey of accidents at work. For categorical variables it is based on the approaches (3.5.3) and (3.5.4), i.e. if the variable $X_j$ is nominal, then (treating NA as a separate level)
 $$
-d({x_{ij}}^',x_{ij})=
+d(x_{ij}^',x_{ij})=
 \begin{cases}
-1&\text{if}\;x_{ij}}^'=x_{ij},\cr
-0&\text{if}\;x_{ij}}^'\ne x_{ij}. 
+1&\text{if}\;x_{ij}^'=x_{ij},\cr
+0&\text{if}\;x_{ij}^'\ne x_{ij}. 
 \end{cases}
 \text{(3.5.9)}
 $$
 
 If $X_j$ is ordinal (assuming for simplification and without loss of generality that categories are numbered from 1 to $\mathfrak{r}_j$, where $\mathfrak{r}_j$ is the number of categories), then (NA is treated as a separate, lowest category)
 $$
-d({x_{ij}}^',x_{ij})=\frac{\mathfrak{r}(x_{ij}^',x_{ij})}{\mathfrak{r}_j-1}, \quad \text{(3.5.10)}
+d(x_{ij}^',x_{ij})=\frac{\mathfrak{r}(x_{ij}^',x_{ij})}{\mathfrak{r}_j-1}, \quad \text{(3.5.10)}
 $$
-where $\mathfrak{r}(x_{ij}}^',x_{ij})$ is the absolute difference in categories between $x_{ij}}^'$ and $x_{ij}$. These partial distances take always values from [0,1]. There are, however, some problems with using them, especially if recoding is applied. The number of categories of a recoded variable in the original set and in the set after SDC will be different. Therefore, in the first place, it should be ensured that the numbers of the categories left unchanged are identical in both variants. For example, if before recoding the variable $X_j$ had $\mathfrak{r}_j$=8 categories marked as 1,2,3,4,5,6,7,8 and as a result of recoding categories 2 and 3 and 6 and 7 were combined, then the new categories should have respectively numbers 1,2,4,5,6,8. Then the option (3.5.10) for categorical variables applies in this case as well.
+where $\mathfrak{r}(x_{ij}^',x_{ij})$ is the absolute difference in categories between $x_{ij}^'$ and $x_{ij}$. These partial distances take always values from [0,1]. There are, however, some problems with using them, especially if recoding is applied. The number of categories of a recoded variable in the original set and in the set after SDC will be different. Therefore, in the first place, it should be ensured that the numbers of the categories left unchanged are identical in both variants. For example, if before recoding the variable $X_j$ had $\mathfrak{r}_j$=8 categories marked as 1,2,3,4,5,6,7,8 and as a result of recoding categories 2 and 3 and 6 and 7 were combined, then the new categories should have respectively numbers 1,2,4,5,6,8. Then the option (3.5.10) for categorical variables applies in this case as well.
 
 Much more complicated situation occurs for continuous variables. Młodak (2020) proposed several options is this respect, e.g. normalized absolute value or normalized square of difference between $x_{ij}^'$ and $x_{ij}$, i.e. 
 $$
