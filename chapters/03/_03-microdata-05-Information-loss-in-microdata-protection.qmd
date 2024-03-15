@@ -522,8 +522,8 @@ Values of (3.5.5) are also easily interpretable - it can be understood as the ex
 The above presented concepts of information loss prompt the question whether it is possible to construct complex measure of information loss taking variables of all measurement scales into account. The relevant proposal was formulated by Młodak (2020) and applied by Młodak, Pietrzak and Józefowski (2022) to the case of microdata from the Polish survey of accodents at work. For categorical variables it is based on the approaches (3.5.1) and (3.5.2), i.e. if the variable $X_j$ is nominal, then (treating NA as a separate level)
 $$
 d({x_{ij}}^',x_{ij})=\begin{cases}
-1&\textmd{if}\;x_{ij}}^'=x_{ij},\cr
-0&\textmd{if}\;x_{ij}}^'\ne x_{ij}. (3.5.6)
+1&\text{if}\;x_{ij}}^'=x_{ij},\cr
+0&\text{if}\;x_{ij}}^'\ne x_{ij}. (3.5.6)
 $$
 If $X_j$ is ordinal (assuming for simplification and without loss of generality that categories are numbered from 1 to $\mathfrak{r}_j$, where $\mathfrak{r}_j$ is the number of categories), then (NA is treated as a separate, lowest category)
 $$
@@ -560,8 +560,8 @@ $j=1,2,\ldots,m$.
 An additional problem occurs if non-perturbative SDC tools are used. In this case the original values are either suppressed or remained unchanged. How to proceed in this case during computation of the measures (3.5.9) and (3.5.10) also depends on the measurement scale of the variables. The used If $X_j$ is nominal, then if $x_{ij}^'$ is hidden then one should assume $d(x_{ij}^',x_{ij})=1$; if $X_j$ is ordinal, then we assign $x_{ij}^':=1$ if $x_{ij}$ is closer to $\mathfrak{r}_j$ or $x_{ij}^':=\mathfrak{r}_j$ if $X_j$ is closer to 1; if $X_j$ is continuous, then
 $$
 x_{ij}^':=\begin{cases}
-\max\limits_{h=1,2,\ldots,n}{x_{hj}}&\textmd{if}\quad x_{ij}\le\med_{h=1,2,\ldots,n}{x_{hj}},\\
-\min\limits_{h=1,2,\ldots,n}{x_{hj}}&\textmd{if}\quad x_{ij}>\med_{h=1,2,\ldots,n}{x_{hj}}.
+\max\limits_{h=1,2,\ldots,n}{x_{hj}}&\text{if}\quad x_{ij}\le\text{med}_{h=1,2,\ldots,n}{x_{hj}},\\
+\min\limits_{h=1,2,\ldots,n}{x_{hj}}&\text{if}\quad x_{ij}>\text{med}_{h=1,2,\ldots,n}{x_{hj}}.
 \end{cases}
 $$
 
