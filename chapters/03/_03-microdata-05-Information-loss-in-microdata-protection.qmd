@@ -298,8 +298,8 @@ In each local neighbourhood of cell *k* a smoothing polynomial regression model 
 The Special Uniques Detection Algorithm (SUDA) (Elliot *et.al.*, 2005) is a software system (windows application available as freeware under restricted licence) that provides disclosure risk broken down by record, variable, variable value and by interactions of those. It is based on the concept of a "special unique". A special unique is a record that is a sample unique on a set of variables and that is also unique on a subset of those variables. Empirical work has shown that special uniques are more likely to be population unique than random uniques. Special uniques can be classified according to the size and number of the smallest subset of key variables that defines the record as unique, known as minimal sample uniques (MSU). In the algorithm, all MSUs are found for each record on all possible subsets of the key variables where the maximum size of the subsets *m* is specified by the user. ![](Images/media/image20.png){width="0.2in" height="0.2in"}. For each MSU of size $k$ contained in a given observation the following score is computed (cf. Templ (2017)):
 $$
 s_k=\begin{cases}
-\frac{1}{m!}\prod_{i=k}^q{(m-i)}&\textmd{if}\quad k\le q,\\
-0&\textmd{if}\quad k>q,
+\frac{1}{m!}\prod_{i=k}^q{(m-i)}&\text{if}\quad k\le q,\\
+0&\text{if}\quad k>q,
 \end{cases}
 $$
 where $q$ is the total number of key categorical variables in the data set and $q$ -- arbitrarily defined maximum size of MSU. Thus, the smaller $k$, the larger $s_k$ and higher the risk. The SUDA score for the observation is the product of scores for all MSUs contained in it. The final SUDA score is obtained by normalizing $s_k$ by $q!$.   
@@ -506,7 +506,7 @@ Table 1. Examples of measures of information loss for continuous variables.
 Source: Domingo-Ferrer, Mateo-Sanz and Torra (2001).
 
 In Yancey, Winkler and Creecy (2002), it is observed that dividing by $x_{\text{ij}}$ causes the $X-X^'$ mean variation to rise sharply when the original value $x_{\text{ij}}$ is close to 0. This dependency on the particular original value being undesirable in an information loss measure, Yancey, Winkler and Creecy (2002) propose to replace the mean variation of $X-X^'$ by the more stable measure
-$$IL1=\frac{1}{np}\sum_{j=1}^p{\sum_{i=1}^n{\frac{|x_{ij}-x{ij}'|}{\sqrt{2}S_j}}},$$
+$$IL1=\frac{1}{np}\sum_{j=1}^p{\sum_{i=1}^n{\frac{|x_{ij}-x_{ij}'|}{\sqrt{2}S_j}}},$$
 where $S_j$ is the standard deviation of the $j$-th variable in the original dataset. This measure was incorporated into the sdcMicro R package. The IL1 measure, in turn, is highly sensitive to small disturbances and weak differentiation of feature values - it may take too high values for variables with low differentiation, and too low - when the differentiation is significant. In practice, if $S_j$ is very close to zero, we obtain as a results INF. It means infinity. In this case, the measure becomes really useless, because it will not allow to compare the loss of information in several microdata sets with statistical confidentiality protected in various ways - if for each of such sets the IL1 measure will be equal to INF.
 
 Trottini (2003) argues that, since information loss is to be traded off for disclosure risk and the latter is bounded ---there is no risk higher than 100%---, upper bounds should be enforced for information loss measures. In practice, the proposal in Trottini (2003) is to limit those measures in @tbl-loss-information based on the mean variation to a predefined maximum value.
