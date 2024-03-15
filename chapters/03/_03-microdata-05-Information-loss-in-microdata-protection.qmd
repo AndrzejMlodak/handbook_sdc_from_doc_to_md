@@ -580,7 +580,7 @@ In practice, the data holder (e.g. official statistics) prefers rather the first
 
 ### Example
   
-  The manner of assessing disclosure risk and information loss owing to the application of SDC methods was demonstrated using data from a case study published on the website of International Household Survey Network (IHSN)[^1]: Statistical Disclosure Control for Microdata: A Practice Guide - Case Study Data and R Script. Use was made of part of the code from the first study of this type, in which the authors, Thijs Benschop and Matthew Welc, applied SDC measures to a set of farms using the sdcMicro package.
+  The manner of assessing disclosure risk and information loss owing to the application of SDC methods was demonstrated using data from a case study published on the website of International Household Survey Network (IHSN)[^1] Statistical Disclosure Control for Microdata: A Practice Guide - Case Study Data and R Script, being a supplement to the book by Benschop, Machingauta and Welch (2022). Use was made of part of the code from the first study of this type, in which the authors applied SDC measures to a set of farms using the sdcMicro package.
   
   The following categorical variables were selected as key variables: REGION, URBRUR (area of residence), HHSIZE (household size), OWNAGLAND (agricultural land ownership), RELIG (religion of household head). The authors of the case study applied local data suppression to these variables. 
   
@@ -666,7 +666,9 @@ In practice, the data holder (e.g. official statistics) prefers rather the first
 
 Bacher J., Brand R., and Bender S. (2002), *Re-identifying register data by survey data using cluster analysis: an empirical study*. International Journal of Uncertainty, Fuzziness and Knowledge Based Systems, 10(5):589--607, 2002.
 
-Benedetti, R. and Franconi, L. (1998). *Statistical and technological solutions for controlled data dissemination,* Pre-proceedings of New Techniques and Technologies for Statistics, 1, 225-232.
+Benedetti, R., and Franconi, L. (1998). *Statistical and technological solutions for controlled data dissemination,* Pre-proceedings of New Techniques and Technologies for Statistics, 1, 225-232.
+
+Benschop, T., Machingauta, C., and Welch, M. (2022). *Statistical Disclosure Control: A Practice Guide*, [[https://readthedocs.org/projects/sdcpractice/downloads/pdf/latest/]{.underline}](https://readthedocs.org/projects/sdcpractice/downloads/pdf/latest/)
 
 Bycroft, C., and Merrett, K. (2005). *Experience of using a post randomisation method at the office for national statistics*. Monographs of official statistics, 125.
 
