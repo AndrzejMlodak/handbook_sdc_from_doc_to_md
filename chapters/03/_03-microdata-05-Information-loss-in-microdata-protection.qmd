@@ -195,6 +195,9 @@ between relevant perturbed ones; such measures can be e.g. correlation coefficie
 Straightforward computation of measures based on basic arithmetic operations like addition, subtraction, multiplication and division on categorical data is not possible. 
 Neither is the use of most descriptive statistics like Eucledian distance, mean, variance, correlation, etc.
 The following alternatives are considered in Domingo-Ferrer and Torra (2001):
+- direct comparison of categorical values,
+- comparison of contingency tables,
+- entropy-based measures.
 
 Below we will describe each of such types of measures.
 
