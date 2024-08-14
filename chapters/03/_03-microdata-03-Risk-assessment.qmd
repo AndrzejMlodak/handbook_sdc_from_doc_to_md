@@ -20,9 +20,7 @@ When the identifying variables are categorical (as it is usually the case in soc
 
 Section 3.3.1 provides an introduction to disclosure risk scenarios. Section 3.3.2 introduces concepts and notation used throughout this chapter whereas Section 3.3.3 discusses the most important classifications of disclosure risk types based on various criterions. Sections from 3.3.4 to 3.3.6 describe different approaches to microdata risk assessment as specified above. However, as microdata risk assessment is a novelty in statistical research there isn't yet agreement on what method is the best, or at least best under given circumstances. In the following sections we comment on various approaches to risk measures and try to give advice on situations where they could or could not be applied. In any case, it has been recognised that research should be undertaken to evaluate these different approaches to microdata risk assessment, see for example Shlomo and Barton (2006).
 
-The focus of these methods and this section of the handbook is for microdata samples from social surveys. For microdata samples from censuses or registers the disclosure risk is known. Business survey microdata are not typically released due to their disclosive nature (skewed distributions or very small number of units sampled from some areas).
-
-In section 1.1 we make some suggestions on practical implementation and in section 3.8 we give examples of real datasets and ways in which risk assessment could be carried out.
+The focus of these methods and this section of the handbook is for microdata samples from social surveys. For microdata samples from censuses or registers the disclosure risk is known. Business survey microdata are not typically released due to their disclosive nature (skewed distributions or very small number of units sampled from some areas). We make some suggestions on practical implementation and we give examples of real datasets and ways in which risk assessment could be carried out.
 
 ### Disclosure risk scenarios
 
