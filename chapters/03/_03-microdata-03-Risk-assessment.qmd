@@ -2,7 +2,7 @@
 
 ### Introduction
 
-The key aim of the Statistical Disclosure Control is to achieve optimal balance between minimization of disclosure risk and simultaneous minimization of the information loss arising from the SDC process (what is equivalent to maximization of data utility for the possible users). In this subchapter we will discuss the first of these aspects. The secod one will be investogated in Section 3.5 (where also some remarks on the practical realization of trade-off between safety and utility of microdata are collected and illustrated by relevant example). We will present basic concepts and types of disclosure risk and show how one can measure of disclosure risk for categorical variables and continuous variables. Because usually for each of such types separate measures are applied, we investigate also a possibility of complex measurement of disclosure risk taking them jointly into account.
+The key aim of the Statistical Disclosure Control is to achieve optimal balance between minimization of disclosure risk and simultaneous minimization of the information loss arising from the SDC process (what is equivalent to maximization of data utility for the possible users). In this subchapter we will discuss the first of these aspects. The second one will be investigated in Section 3.5 (where also some remarks on the practical realization of trade-off between safety and utility of microdata are collected and illustrated by relevant example). We will present basic concepts and types of disclosure risk and show how one can measure of disclosure risk for categorical variables and continuous variables. Because usually for each of such types separate measures are applied, we investigate also a possibility of complex measurement of disclosure risk taking them jointly into account.
 
 ### General remarks on disclosure risk
 
@@ -73,7 +73,7 @@ $$
 \sum_{k=1}^{K}F_{k}=N,\quad\sum_{k=1}^{K}f_{k}=n \quad .
 $$
 
-Formally the sample and population sizes in the models introduced in sections 3.5.4 and 3.5.5 are random and their expectations are denoted by $n$ and $N$ respectively. In practice, the sample and population size are usually replaced by their natural estimators; the actual sample and population sizes, assumed to be known.
+Formally the sample and population sizes in the models introduced in sections 3.3.4 and 3.3.5 are random and their expectations are denoted by $n$ and $N$ respectively. In practice, the sample and population size are usually replaced by their natural estimators; the actual sample and population sizes, assumed to be known.
 
 Observing the values in the table on individual $i \in s$ will classify such individual into one cell. We denote by $k(i)$ the index of the cell into which individual $i\in s$ is classified based on the values of this object.
 
